@@ -9,18 +9,24 @@ import { mockSkillGapResult } from '@/lib/learning-data';
 import type { SkillGap } from '@/lib/learning-data';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Sparkles, Loader2, ArrowLeft, FileText, Zap, CheckCircle } from 'lucide-react';
+import { Sparkles, Loader2, ArrowLeft, FileText, Zap, CheckCircle, Type, Upload } from 'lucide-react';
 
 type Step = 'upload' | 'loading' | 'results';
+type JdInputMode = 'text' | 'pdf';
 
 export default function AICoachingPage() {
     const [step, setStep] = useState<Step>('upload');
     const [resumeFile, setResumeFile] = useState<File | null>(null);
     const [jobDescription, setJobDescription] = useState('');
+    const [jdFile, setJdFile] = useState<File | null>(null);
+    const [jdInputMode, setJdInputMode] = useState<JdInputMode>('text');
     const [results, setResults] = useState<SkillGap | null>(null);
 
+    const hasJdInput = jdInputMode === 'text' ? jobDescription.trim().length > 0 : jdFile !== null;
+    const canGenerate = resumeFile || hasJdInput;
+
     const handleGenerate = async () => {
-        if (!resumeFile && !jobDescription.trim()) return;
+        if (!canGenerate) return;
 
         setStep('loading');
 
@@ -33,13 +39,20 @@ export default function AICoachingPage() {
                 await fetch('/api/parse-resume', { method: 'POST', body: formData });
             }
 
+            // Build JD text — if PDF mode, read the file content
+            let jdText = jobDescription;
+            if (jdInputMode === 'pdf' && jdFile) {
+                // For PDF JD, we send it as a separate file in the generate-path call
+                jdText = `[JD uploaded as PDF: ${jdFile.name}]`;
+            }
+
             // Call generate-path
             const pathRes = await fetch('/api/generate-path', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     skills: ['JavaScript', 'React', 'Python'],
-                    jobDescription: jobDescription,
+                    jobDescription: jdText,
                 }),
             });
 
@@ -58,7 +71,19 @@ export default function AICoachingPage() {
         setStep('upload');
         setResumeFile(null);
         setJobDescription('');
+        setJdFile(null);
+        setJdInputMode('text');
         setResults(null);
+    };
+
+    const handleJdModeSwitch = (mode: JdInputMode) => {
+        setJdInputMode(mode);
+        // Clear the other mode's data when switching
+        if (mode === 'text') {
+            setJdFile(null);
+        } else {
+            setJobDescription('');
+        }
     };
 
     return (
@@ -121,23 +146,79 @@ export default function AICoachingPage() {
                                 onFileSelect={setResumeFile}
                             />
 
-                            {/* Job Description */}
-                            <div className="space-y-2">
-                                <label className="text-sm font-semibold text-gray-700">
-                                    Job Description
-                                </label>
-                                <Textarea
-                                    placeholder="Paste the job description here..."
-                                    value={jobDescription}
-                                    onChange={(e) => setJobDescription(e.target.value)}
-                                    className="min-h-[150px] bg-gray-50/50 border-gray-200 text-sm resize-none focus-visible:ring-[#0a66c2]"
-                                />
+                            {/* Job Description — with toggle */}
+                            <div className="space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <label className="text-sm font-semibold text-gray-700">
+                                        Job Description
+                                    </label>
+                                    <div className="flex bg-gray-100 rounded-lg p-0.5">
+                                        <button
+                                            type="button"
+                                            onClick={() => handleJdModeSwitch('text')}
+                                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
+                                                jdInputMode === 'text'
+                                                    ? 'bg-white text-gray-900 shadow-sm'
+                                                    : 'text-gray-500 hover:text-gray-700'
+                                            }`}
+                                        >
+                                            <Type className="w-3.5 h-3.5" />
+                                            Paste Text
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={() => handleJdModeSwitch('pdf')}
+                                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 ${
+                                                jdInputMode === 'pdf'
+                                                    ? 'bg-white text-gray-900 shadow-sm'
+                                                    : 'text-gray-500 hover:text-gray-700'
+                                            }`}
+                                        >
+                                            <Upload className="w-3.5 h-3.5" />
+                                            Upload PDF
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <AnimatePresence mode="wait">
+                                    {jdInputMode === 'text' ? (
+                                        <motion.div
+                                            key="jd-text"
+                                            initial={{ opacity: 0, y: 8 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -8 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            <Textarea
+                                                placeholder="Paste the job description here..."
+                                                value={jobDescription}
+                                                onChange={(e) => setJobDescription(e.target.value)}
+                                                className="min-h-[150px] bg-gray-50/50 border-gray-200 text-sm resize-none focus-visible:ring-[#0a66c2]"
+                                            />
+                                        </motion.div>
+                                    ) : (
+                                        <motion.div
+                                            key="jd-pdf"
+                                            initial={{ opacity: 0, y: 8 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -8 }}
+                                            transition={{ duration: 0.2 }}
+                                        >
+                                            <UploadBox
+                                                label=""
+                                                accept=".pdf"
+                                                file={jdFile}
+                                                onFileSelect={setJdFile}
+                                            />
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
 
                             {/* Generate Button */}
                             <Button
                                 onClick={handleGenerate}
-                                disabled={!resumeFile && !jobDescription.trim()}
+                                disabled={!canGenerate}
                                 className="w-full bg-[#0a66c2] hover:bg-[#004182] text-white h-12 text-sm font-semibold gap-2"
                             >
                                 <Sparkles className="w-4 h-4" />
@@ -259,3 +340,4 @@ export default function AICoachingPage() {
         </div>
     );
 }
+
