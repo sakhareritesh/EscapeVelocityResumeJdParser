@@ -12,19 +12,20 @@ export function Navbar() {
   const pathname = usePathname();
   const { user, loading } = useAuth();
 
-  const hideNavbar = 
-    pathname.startsWith('/create') || 
+  const hideNavbar =
+    pathname.startsWith('/create') ||
     pathname.startsWith('/login') ||
     pathname.startsWith('/signup') ||
     pathname.startsWith('/spin') ||
     pathname.startsWith('/admin') ||
-    pathname.startsWith('/user/');
+    pathname.startsWith('/user/') ||
+    pathname.startsWith('/learning');
 
 
   if (hideNavbar) {
     return null;
   }
-  
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-sm">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
@@ -38,7 +39,7 @@ export function Navbar() {
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-           <Link href="/#features" className="text-muted-foreground transition-colors hover:text-foreground">
+          <Link href="/#features" className="text-muted-foreground transition-colors hover:text-foreground">
             Features
           </Link>
           <Link href="/#templates" className="text-muted-foreground transition-colors hover:text-foreground">
@@ -52,19 +53,19 @@ export function Navbar() {
           {loading ? (
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
           ) : user ? (
-              <Button asChild>
-                <Link href="/create">Go to Dashboard</Link>
+            <Button asChild>
+              <Link href="/learning">Go to Dashboard</Link>
+            </Button>
+          ) : (
+            <>
+              <Button variant="ghost" asChild>
+                <Link href="/login">Sign In</Link>
               </Button>
-            ) : (
-              <>
-                <Button variant="ghost" asChild>
-                  <Link href="/login">Sign In</Link>
-                </Button>
-                <Button asChild>
-                  <Link href="/signup">Get Started Free</Link>
-                </Button>
-              </>
-            )
+              <Button asChild>
+                <Link href="/signup">Get Started Free</Link>
+              </Button>
+            </>
+          )
           }
           <ThemeToggle />
         </div>
