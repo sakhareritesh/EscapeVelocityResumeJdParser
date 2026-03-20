@@ -1,37 +1,62 @@
 # 🧠 AI Adaptive Onboarding Engine — Backend
 
-A production-ready Flask backend that uses **Gemini LLM** to analyze resumes against
-job descriptions, identify skill gaps, and generate personalized learning roadmaps.
+A production-ready Flask backend that uses **Gemini 2.5 Flash** to analyze candidate resumes against job descriptions, identify skill gaps, and generate **Graph-Based Personalized Learning Roadmaps**. 
+
+This repository was built to solve the challenge of static, "one-size-fits-all" corporate onboarding by dynamically mapping optimal, personalized training pathways based on a candidate's existing baseline.
+
+---
+
+## ✨ Key Features & Architecture
+
+### 1. 📄 Multi-Strategy Intelligent Document Parsing
+Traditional parsing (like PyPDF2) easily breaks on multi-column or scanned resumes. We built a robust 3-tier cascade extraction strategy:
+*   **Strategy 1 (pdfplumber)**: Excellent for complex, multi-column layouts and tables.
+*   **Strategy 2 (PyPDF2)**: Reliable fallback for simple, single-column text PDFs.
+*   **Strategy 3 (Gemini Multimodal)**: A nuclear fallback that passes raw PDF bytes to Gemini for native OCR and visual extraction of scanned or image-heavy documents.
+
+### 2. 🧬 O*NET-Inspired Skill Taxonomy & Extraction
+Instead of raw keyword matching, skills are extracted into rich JSON objects with:
+*   Standardized categorization into 15+ domains (e.g., `programming_languages`, `cloud_services`).
+*   Inferred **Years of Experience** and **Project Context**.
+*   Fuzzy-logic alias matching (e.g., `JS` → `JavaScript`, `k8s` → `Kubernetes`).
+
+### 3. 🗺️ Graph-Based Adaptive Pathing (The Algorithm)
+Using **NetworkX**, the engine builds a Directed Acyclic Graph (DAG) for the learning path:
+1.  **Dependency Mapping**: Automatically injects missing prerequisites (e.g., you can't learn Docker without basic Linux).
+2.  **Topological Sort**: Prioritizes foundational skills first, ensuring candidates learn in a logical, impossible-to-fail order.
+3.  **Adaptive Weighting**: Estimates learning hours, natively reducing projected time by 40% if the candidate possesses a highly related skill.
 
 ---
 
 ## 🗂 Project Structure
 
-```
+```text
 backend/
-├── app.py                  # Flask app factory + entry point
+├── app.py                  # Flask application factory & entry point
 ├── routes/
-│   └── analyze.py          # POST /analyze, GET /session/<id>, GET /sessions
+│   └── analyze.py          # Core endpoints: POST /analyze, GET /sessions 
 ├── services/
-│   ├── gemini_service.py   # Gemini API wrapper with retry logic
-│   ├── parser.py           # Resume & JD parsing + skill gap calculation
-│   └── roadmap.py          # Learning path & explanation generation
+│   ├── gemini_service.py   # Gemini LLM initialization, config, and retry logic
+│   ├── parser.py           # Resume & JD parsing, O*NET taxonomy, Gap calculation
+│   └── roadmap.py          # NetworkX Graph algorithm & learning path generation
 ├── db/
 │   └── mongo.py            # MongoDB singleton connection
 ├── utils/
-│   └── file_handler.py     # PDF / DOCX / TXT text extraction
-├── .env                    # 🔑 API keys (never commit this)
-├── requirements.txt
+│   └── file_handler.py     # 3-tier PDF / DOCX / TXT strategy text extraction
+├── .env.example            # Environment variables template
+├── requirements.txt        # Python dependencies
+├── run_analysis.py         # CLI script to test APIs locally with test files
+├── test_api.py             # Comprehensive test suite mapping all endpoints
 └── README.md
 ```
 
 ---
 
-## ⚙️ Setup
+## ⚙️ Setup Instructions
 
 ### 1. Clone & create virtualenv
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate       # Windows: venv\Scripts\activate
 ```
 
@@ -41,8 +66,14 @@ pip install -r requirements.txt
 ```
 
 ### 3. Configure `.env`
+Create a `.env` file in the root based on `.env.example`:
 ```env
+# Get an API key from https://aistudio.google.com
 GEMINI_API_KEY=your_gemini_api_key_here
+
+# Recommended for demo/high limits: gemini-2.0-flash or gemini-2.5-flash-lite
+GEMINI_MODEL=gemini-2.0-flash
+
 MONGO_URI=your_mongodb_connection_string_here
 MONGO_DB_NAME=adaptive_onboarding
 FLASK_ENV=development
@@ -50,159 +81,173 @@ FLASK_DEBUG=True
 PORT=5000
 ```
 
-> **MongoDB URI examples:**
-> - Local:  `mongodb://localhost:27017`
-> - Atlas:  `mongodb+srv://<user>:<pass>@cluster.mongodb.net/?retryWrites=true&w=majority`
-
-### 4. Run
+### 4. Run the API Server
 ```bash
 python app.py
+```
+
+### 5. Run the Test Suite
+The testing script validates the graph-building algorithm, metadata extraction, endpoint schemas, and DB saving:
+```bash
+python test_api.py
 ```
 
 ---
 
 ## 🔌 API Reference
 
-### `POST /analyze`
+### `GET /upload`
+Serves a responsive, dark-themed HTML UI for testing the flow directly in the browser. Features a 2-step workflow:
+1. Upload & Parse (instant text extraction).
+2. Review & Analyze (run full Gemini AI pipeline).
 
-Analyze a resume against a job description.
+---
 
-**Input** — `multipart/form-data` or `application/x-www-form-urlencoded`:
+### `POST /parse`
 
-| Field         | Type           | Description                              |
-|---------------|----------------|------------------------------------------|
-| `resume_text` | string         | Plain-text resume (alternative to file)  |
-| `resume_file` | file upload    | PDF / DOCX / TXT resume file             |
-| `jd_text`     | string         | Plain-text job description               |
-| `jd_file`     | file upload    | PDF / DOCX / TXT job description file    |
+Instantly extracts raw text from Resume and JD files (PDF/DOCX/TXT) using our 3-tier OCR strategy. **Does not hit the AI / LLM.**
 
-> Either `*_text` or `*_file` must be provided for each. File takes priority.
+**Input** (`multipart/form-data`):
+*   `resume_file`: Candidate resume document
+*   `jd_file`: Job description document
 
-**Response** `200 OK`:
+**Response** (`200 OK`):
 ```json
 {
-  "success": true,
-  "session_id": "664f1a2b3c4d5e6f7a8b9c0d",
-  "resume_skills": [
-    {"name": "Python", "level": "Advanced"},
-    {"name": "SQL",    "level": "Intermediate"}
-  ],
-  "jd_skills": [
-    {"name": "React",  "level": "Required"},
-    {"name": "Docker", "level": "Optional"}
-  ],
-  "skill_gap": ["React", "Node.js"],
-  "learning_path": [
-    {"step": 1, "skill": "JavaScript Fundamentals", "reason": "Prerequisite for React"},
-    {"step": 2, "skill": "React",                   "reason": "Required for the role"}
-  ],
-  "explanation": "Based on your strong Python background...",
-  "meta": {
-    "total_resume_skills": 8,
-    "total_required_skills": 5,
-    "total_optional_skills": 2,
-    "total_gaps": 2,
-    "total_learning_steps": 3
+  "resume": {
+    "status": "ok",
+    "text": "Parsed text...",
+    "char_count": 3498,
+    "word_count": 520
+  },
+  "jd": {
+    "status": "ok",
+    "text": "Parsed text...",
+    "char_count": 2149,
+    "word_count": 310
   }
 }
 ```
 
 ---
 
-### `GET /session/<session_id>`
+### `POST /analyze`
 
-Retrieve a stored analysis session by ID.
+Analyzes a resume against a job description, calculates skill gaps, and generates a rich adaptive learning DAG path using Gemini LLM.
 
+**Input** (`multipart/form-data`):
+*   `resume_file` / `resume_text`: PDF/DOCX/TXT file OR raw string
+*   `jd_file` / `jd_text`: PDF/DOCX/TXT file OR raw string
+
+**Response** (`200 OK`):
 ```json
 {
   "success": true,
-  "session": { ...full session document... }
+  "session_id": "69bd...c129",
+  "role_info": {
+    "title": "Full Stack Engineer",
+    "seniority": "Mid-Senior",
+    "domain": "SaaS/Web Development"
+  },
+  "resume_skills": [
+    {
+       "name": "Python", 
+       "level": "Advanced", 
+       "category": "programming_languages", 
+       "years_experience": 4, 
+       "context": "Built REST APIs"
+    }
+  ],
+  "jd_skills": [ ... ],
+  "skill_gap": [
+    {
+       "skill": "React", 
+       "priority": "high", 
+       "category": "frontend_frameworks", 
+       "candidate_has_related": ["JavaScript"]
+    }
+  ],
+  "learning_path": [
+    {
+      "step": 1,
+      "skill": "JavaScript",
+      "reason": "Core prerequisite for React...",
+      "estimated_hours": 30,
+      "difficulty": "Medium",
+      "prerequisites_met": ["Python"],
+      "resources": [{"name": "MDN JS", "url": "https://developer.mozilla.org/..."}],
+      "milestones": ["Build a CLI tool using Node.js"],
+      "project_idea": "Build a weather dashboard CLI",
+      "cumulative_hours": 30,
+      "category": "programming_languages"
+    }
+  ],
+  "dependency_graph": {
+    "nodes": [{"id": "JavaScript", "group": "programming_languages", "estimated_hours": 30}],
+    "edges": [{"source": "JavaScript", "target": "React"}],
+    "stats": {"total_nodes": 2, "total_edges": 1, "total_hours": 80}
+  },
+  "explanation": "Welcome aboard! Looking at your profile, it's clear...",
+  "meta": {
+    "match_percentage": 75.0,
+    "total_gaps": 2,
+    "total_learning_hours": 80,
+    "total_learning_weeks": 4
+  }
 }
 ```
 
 ---
 
 ### `GET /sessions`
+List the 20 most recent sessions (excludes heavy blobs like raw resume text or large DAG arrays for lightning-fast frontend loading).
 
-List the 20 most recent sessions (without heavy text fields).
+---
+
+### `GET /session/<session_id>`
+Retrieve a previously generated session containing the full dependency graph and learning path.
 
 ---
 
 ### `GET /health`
+Returns the status of the API and verifies connectivity with MongoDB.
 
+**Response** (`200 OK`):
 ```json
 {
-  "status": "ok",
+  "database": "connected",
   "service": "AI Adaptive Onboarding Engine",
-  "version": "1.0.0",
-  "database": "connected"
+  "status": "ok",
+  "version": "1.0.0"
 }
 ```
 
 ---
 
-## 🧪 Quick Test (curl)
+## 🗄 MongoDB Schema (`sessions` collection)
 
-```bash
-# Text input
-curl -X POST http://localhost:5000/analyze \
-  -F "resume_text=Experienced Python developer with 4 years building REST APIs using Flask and Django. Proficient in PostgreSQL, Redis, and Docker. BS Computer Science." \
-  -F "jd_text=We are looking for a Full Stack Engineer with React, Node.js, TypeScript, and Python. Docker and AWS experience required."
-
-# File upload
-curl -X POST http://localhost:5000/analyze \
-  -F "resume_file=@/path/to/resume.pdf" \
-  -F "jd_file=@/path/to/job_description.txt"
-```
-
----
-
-## 🏗 Next.js Integration
-
-```javascript
-// pages/api/analyze.js or a client fetch
-const formData = new FormData();
-formData.append("resume_text", resumeText);
-formData.append("jd_text", jdText);
-
-const res = await fetch("http://localhost:5000/analyze", {
-  method: "POST",
-  body: formData,
-});
-const data = await res.json();
-// data.skill_gap, data.learning_path, data.resume_skills, etc.
-```
-
----
-
-## 🗄 MongoDB Schema
-
-Collection: **sessions**
-
-```
-_id          ObjectId    Auto-generated
-created_at   ISODate     UTC timestamp
-resume_text  string      Raw resume input
-jd_text      string      Raw JD input
-resume_skills  array     [{name, level}]
-jd_skills      array     [{name, level:"Required"|"Optional"}]
-skill_gap      array     [string]  — missing required skills
-learning_path  array     [{step, skill, reason}]
-explanation    string    AI-generated narrative
+```text
+_id               ObjectId    Auto-generated
+created_at        ISODate     UTC timestamp
+resume_text       string      Raw text extracted from input
+jd_text           string      Raw text extracted from JD
+role_title        string      Extracted role
+resume_skills     array       Objects with category & years_experience
+jd_skills         array       Required vs Optional
+skill_gap         array       Missing skills with related baseline
+learning_path     array       Rich steps with resources and time
+dependency_graph  object      Nodes and edges array for UI
+explanation       string      GenAI coaching narrative
+stats             object      Match % and Hour/Week estimates
 ```
 
 ---
 
 ## ⚠️ Error Handling
 
-All errors return:
-```json
-{"success": false, "error": "Human-readable error message"}
-```
+All errors return JSON in standard format: `{"success": false, "error": "Human-readable error"}`
 
-| Status | Meaning                                   |
-|--------|-------------------------------------------|
-| 400    | Bad input (missing fields, bad file type) |
-| 404    | Session not found                         |
-| 413    | File too large (>16 MB)                   |
-| 500    | Gemini API or server error                |
+*   **400**: Bad input (missing fields, un-extractable file bytes).
+*   **404**: Endpoint/Session not found.
+*   **413**: File too large (>10 MB).
+*   **500**: Gemini API exhaustion or timeout.

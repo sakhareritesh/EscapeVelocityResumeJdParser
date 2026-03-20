@@ -13,9 +13,65 @@ from services.parser import (
 )
 from services.roadmap import generate_learning_path, generate_explanation, export_learning_graph
 from db.mongo import get_sessions_collection
-from utils.file_handler import get_text_input
+from utils.file_handler import get_text_input, extract_text_from_file
 
 analyze_bp = Blueprint("analyze", __name__)
+
+
+# ── POST /parse (instant — no Gemini) ────────────────────────────────────────────
+
+@analyze_bp.route("/parse", methods=["POST"])
+def parse_files():
+    """
+    Extract text from uploaded files WITHOUT calling Gemini.
+    This is instant (<1 sec) and lets the frontend verify parsing works.
+
+    Accepts multipart/form-data with:
+      - resume_file  (file upload — PDF, DOCX, TXT)
+      - jd_file      (file upload — PDF, DOCX, TXT)
+      OR
+      - resume_text   (str)
+      - jd_text       (str)
+
+    Returns the raw extracted text so frontend can preview before analysis.
+    """
+    result = {"success": True}
+
+    # Parse resume
+    try:
+        resume_text = get_text_input(
+            request.form, request.files,
+            text_field="resume_text",
+            file_field="resume_file",
+        )
+        result["resume"] = {
+            "text": resume_text,
+            "char_count": len(resume_text),
+            "word_count": len(resume_text.split()),
+            "preview": resume_text[:500],
+            "status": "ok",
+        }
+    except ValueError as e:
+        result["resume"] = {"text": "", "char_count": 0, "status": "error", "error": str(e)}
+
+    # Parse JD
+    try:
+        jd_text = get_text_input(
+            request.form, request.files,
+            text_field="jd_text",
+            file_field="jd_file",
+        )
+        result["jd"] = {
+            "text": jd_text,
+            "char_count": len(jd_text),
+            "word_count": len(jd_text.split()),
+            "preview": jd_text[:500],
+            "status": "ok",
+        }
+    except ValueError as e:
+        result["jd"] = {"text": "", "char_count": 0, "status": "error", "error": str(e)}
+
+    return jsonify(result), 200
 
 
 # ── Helper ──────────────────────────────────────────────────────────────────────

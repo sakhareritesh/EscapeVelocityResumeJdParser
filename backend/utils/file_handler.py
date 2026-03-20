@@ -75,7 +75,7 @@ def _extract_pdf_gemini(file_bytes: bytes) -> str:
             return ""
 
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel("gemini-2.5-flash")
+        model = genai.GenerativeModel(os.getenv("GEMINI_MODEL", "gemini-2.0-flash"))
 
         # Encode PDF as base64 for inline data
         b64_pdf = base64.b64encode(file_bytes).decode("utf-8")

@@ -8,7 +8,7 @@ Enhanced with:
   - Confidence scoring
 """
 
-from .gemini_service import generate_response
+from .gemini_service import generate_response, sanitize_text_for_prompt
 
 
 # ── O*NET-Inspired Skill Taxonomy ───────────────────────────────────────────────
@@ -123,6 +123,9 @@ def parse_resume(resume_text: str) -> list[dict]:
     """
     if not resume_text or not resume_text.strip():
         raise ValueError("Resume text is empty.")
+
+    # Sanitize text to prevent JSON output corruption
+    resume_text = sanitize_text_for_prompt(resume_text)
 
     prompt = f"""You are an expert technical recruiter and skills analyst with deep 
 knowledge of software engineering, data science, DevOps, and IT roles.
@@ -257,6 +260,9 @@ def parse_job_description(jd_text: str) -> dict:
     """
     if not jd_text or not jd_text.strip():
         raise ValueError("Job description text is empty.")
+
+    # Sanitize text to prevent JSON output corruption
+    jd_text = sanitize_text_for_prompt(jd_text)
 
     prompt = f"""You are an expert technical recruiter and job market analyst.
 

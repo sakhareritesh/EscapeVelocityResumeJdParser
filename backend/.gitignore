@@ -4,18 +4,14 @@
 env/
 venv/
 ENV/
-env.bak/
-venv.bak/
 
-# Byte-compiled / optimized / DLL files
+# Byte-compiled / optimized files
 __pycache__/
 *.py[cod]
 *$py.class
 
 # Mac OS
 .DS_Store
-.AppleDouble
-.LSOverride
 
 # IDEs
 .vscode/
@@ -28,10 +24,6 @@ dist/
 build/
 *.egg-info/
 
-# Uploads / Data
-*.pdf
-*.docx
-*.txt
-
-# Exclude the test pdf and text files if there are any generated in testing,
-# but DO NOT ignore test_api.py (so leave it alone).
+# Keep src/ sample files (resume + JD) tracked by git
+# Only ignore generated outputs
+*.output.json
