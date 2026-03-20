@@ -1,0 +1,402 @@
+5. POST /analyze — full text analysis
+======================================================================
+  ⏳ Sending request (may take 30-60s for Gemini calls)...
+  Status: 200
+
+  ── 5a. Response Structure ──────────────────────────────────────
+  ✅ PASS [success flag]
+  ✅ PASS [has session_id]
+  ✅ PASS [has resume_skills]
+  ✅ PASS [has jd_skills]
+  ✅ PASS [has skill_gap]
+  ✅ PASS [has learning_path]
+  ✅ PASS [has dependency_graph]
+  ✅ PASS [has explanation]
+  ✅ PASS [has meta]
+  ✅ PASS [has role_info]
+
+  ── 5b. Role Info (from JD parsing) ─────────────────────────────
+  ✅ PASS [role_info is dict]
+  ✅ PASS [has role title]
+  ✅ PASS [has seniority]
+  ✅ PASS [has domain]
+  📋 Role: Full Stack Engineer | Mid-Senior | SaaS/Web Development
+
+  ── 5c. Resume Skills (enhanced extraction) ─────────────────────
+  ✅ PASS [resume_skills is list]
+  ✅ PASS [resume_skills non-empty]
+  ✅ PASS [resume_skills >= 10]
+  📝 Found 20 skills:
+     🟣 Python — Expert (6y) [programming_languages]
+     🟢 Flask — Intermediate (4y) [backend_frameworks]
+     🟢 FastAPI — Intermediate (4y) [backend_frameworks]
+     🟢 PostgreSQL — Intermediate (4y) [databases]
+     🟢 SQL — Intermediate (4y) [programming_languages]
+     🟢 Redis — Intermediate (4y) [databases]
+     🟢 pytest — Intermediate (4y) [testing]
+     🟢 Unit Testing — Intermediate (4y) [other]
+     🟢 Integration Testing — Intermediate (4y) [other]
+     🟢 Linux — Intermediate (4y) [other]
+     🟢 Bash — Intermediate (4y) [other]
+     🔵 Git — Advanced (6y) [version_control]
+     🟢 GitHub — Intermediate (6y) [version_control]
+     🟡 CI/CD — Beginner (6y) [methodologies]
+     🟢 Pandas — Intermediate (2y) [data_ml]
+     🟢 NumPy — Intermediate (2y) [data_ml]
+     🔵 REST API Development — Advanced (4y) [other]
+     🟢 System Design — Intermediate (4y) [other]
+     🟢 Data Processing — Intermediate (2y) [other]
+     🟢 Software Deployment — Intermediate (4y) [other]
+  ✅ PASS [skills have 'category' field]
+  ✅ PASS [skills have 'years_experience' field]
+  ✅ PASS [skills have 'context' field]
+
+  ── 5d. JD Skills ───────────────────────────────────────────────
+  ✅ PASS [jd_skills is list]
+  ✅ PASS [jd_skills non-empty]
+  📄 Required: 12 | Optional: 6
+     🔴 React — Required
+     🔴 Node.js — Required
+     🔴 TypeScript — Required
+     🔴 Python — Required
+     🔴 PostgreSQL — Required
+     🔴 Docker — Required
+     🔴 AWS EC2 — Required
+     🔴 AWS S3 — Required
+     🔴 AWS Lambda — Required
+     🔴 JavaScript — Required
+     🔴 RESTful APIs — Required
+     🔴 SQL — Required
+     🟠 GraphQL — Optional
+     🟠 Kubernetes — Optional
+     🟠 Redis — Optional
+     🟠 CI/CD — Optional
+     🟠 GitHub Actions — Optional
+     🟠 Jenkins — Optional
+
+  ── 5e. Skill Gap Analysis (enhanced) ───────────────────────────
+  ✅ PASS [skill_gap is list]
+  🔍 9 gaps identified:
+  ✅ PASS [gap 'React' has 'skill' field]
+  ✅ PASS [gap 'React' has 'category' field]
+  ✅ PASS [gap 'React' has 'priority' field]
+     ⚠️  React [frontend_frameworks]
+  ✅ PASS [gap 'Node.js' has 'skill' field]
+  ✅ PASS [gap 'Node.js' has 'category' field]
+  ✅ PASS [gap 'Node.js' has 'priority' field]
+     ⚠️  Node.js [backend_frameworks] (related: Flask, FastAPI)
+  ✅ PASS [gap 'TypeScript' has 'skill' field]
+  ✅ PASS [gap 'TypeScript' has 'category' field]
+  ✅ PASS [gap 'TypeScript' has 'priority' field]
+     ⚠️  TypeScript [programming_languages] (related: Python, SQL)
+  ✅ PASS [gap 'Docker' has 'skill' field]
+  ✅ PASS [gap 'Docker' has 'category' field]
+  ✅ PASS [gap 'Docker' has 'priority' field]
+     ⚠️  Docker [devops_tools]
+  ✅ PASS [gap 'AWS EC2' has 'skill' field]
+  ✅ PASS [gap 'AWS EC2' has 'category' field]
+  ✅ PASS [gap 'AWS EC2' has 'priority' field]
+     ⚠️  AWS EC2 [other]
+  ✅ PASS [gap 'AWS S3' has 'skill' field]
+  ✅ PASS [gap 'AWS S3' has 'category' field]
+  ✅ PASS [gap 'AWS S3' has 'priority' field]
+     ⚠️  AWS S3 [other]
+  ✅ PASS [gap 'AWS Lambda' has 'skill' field]
+  ✅ PASS [gap 'AWS Lambda' has 'category' field]
+  ✅ PASS [gap 'AWS Lambda' has 'priority' field]
+     ⚠️  AWS Lambda [other]
+  ✅ PASS [gap 'JavaScript' has 'skill' field]
+  ✅ PASS [gap 'JavaScript' has 'category' field]
+  ✅ PASS [gap 'JavaScript' has 'priority' field]
+     ⚠️  JavaScript [programming_languages] (related: Python, SQL)
+  ✅ PASS [gap 'RESTful APIs' has 'skill' field]
+  ✅ PASS [gap 'RESTful APIs' has 'category' field]
+  ✅ PASS [gap 'RESTful APIs' has 'priority' field]
+     ⚠️  RESTful APIs [other]
+
+  ── 5f. Learning Path (graph-based adaptive pathing) ────────────
+  ✅ PASS [learning_path is list]
+  ✅ PASS [learning_path non-empty]
+  🗺  11 learning steps:
+  ✅ PASS [step 1 has 'skill']
+  ✅ PASS [step 1 has 'reason']
+  ✅ PASS [step 1 has 'estimated_hours']
+  ✅ PASS [step 1 has 'difficulty']
+
+     Step 1: html — 15h, Easy [implicit prereq]
+       Reason: HTML is the foundational language for all web content. Mastering it is the first step towards building any web interface...
+       Resources (3):
+         📚 MDN Web Docs - HTML Basics: https://developer.mozilla.org/en-US/docs/Web/HTML
+         📚 W3Schools HTML Tutorial: https://www.w3schools.com/html/
+         📚 freeCodeCamp - Responsive Web Design Certification (HTML section): https://www.freecodecamp.org/learn/responsive-web-design/
+       Milestones (3):
+         🎯 Structure a multi-page website with proper semantic HTML5 elements.
+         🎯 Embed various media types (images, audio, video) and create interactive forms.
+         🎯 Understand and correctly use common HTML tags for text, lists, tables, and links.
+       Project: 🔨 Build a simple personal portfolio website with multiple pages (Home, About, Projects, Contact) using
+  ✅ PASS [step 2 has 'skill']
+  ✅ PASS [step 2 has 'reason']
+  ✅ PASS [step 2 has 'estimated_hours']
+  ✅ PASS [step 2 has 'difficulty']
+
+     Step 2: css — 25h, Easy [implicit prereq]
+       Reason: CSS is essential for styling HTML content, making web pages visually appealing and responsive. It directly builds upon y...
+       Resources (3):
+         📚 MDN Web Docs - CSS Basics: https://developer.mozilla.org/en-US/docs/Web/CSS
+         📚 CSS-Tricks: https://css-tricks.com/
+         📚 freeCodeCamp - Responsive Web Design Certification (CSS section): https://www.freecodecamp.org/learn/responsive-web-design/
+       Milestones (3):
+         🎯 Style a multi-column responsive layout using Flexbox or CSS Grid.
+         🎯 Implement basic animations and transitions for UI elements.
+         🎯 Understand and apply CSS selectors, specificity, and the box model effectively.
+       Project: 🔨 Take your HTML portfolio website and style it to be visually appealing and responsive across differe
+  ✅ PASS [step 3 has 'skill']
+  ✅ PASS [step 3 has 'reason']
+  ✅ PASS [step 3 has 'estimated_hours']
+  ✅ PASS [step 3 has 'difficulty']
+
+     Step 3: JavaScript — 50h, Medium
+       Reason: JavaScript is the programming language of the web, enabling interactive and dynamic content. It's a core prerequisite fo...
+       Resources (3):
+         📚 MDN Web Docs - JavaScript Guide: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide
+         📚 JavaScript.info: https://javascript.info/
+         📚 freeCodeCamp - JavaScript Algorithms and Data Structures: https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/
+       Milestones (3):
+         🎯 Manipulate the Document Object Model (DOM) to dynamically update web page content.
+         🎯 Implement asynchronous operations using Promises and async/await with error handling.
+         🎯 Handle user events (clicks, input changes) to create interactive UI elements.
+       Project: 🔨 Build an interactive to-do list application (frontend only) that allows users to add, delete, and ma
+  ✅ PASS [step 4 has 'skill']
+  ✅ PASS [step 4 has 'reason']
+  ✅ PASS [step 4 has 'estimated_hours']
+  ✅ PASS [step 4 has 'difficulty']
+
+     Step 4: Docker — 15h, Medium (builds on: Linux)
+       Reason: Docker provides containerization, crucial for consistent development and deployment environments. It builds on your Linu...
+       Resources (3):
+         📚 Docker Documentation - Get Started: https://docs.docker.com/get-started/
+         📚 freeCodeCamp - Docker for Developers: https://www.freecodecamp.org/news/docker-for-developers/
+         📚 DigitalOcean - How To Install and Use Docker: https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04
+       Milestones (3):
+         🎯 Containerize an existing Python Flask/FastAPI application.
+         🎯 Use Docker Compose to orchestrate a multi-service application (e.g., app + PostgreSQL + Redis).
+         🎯 Understand and implement Docker volumes and networks for data persistence and inter-container communication.
+       Project: 🔨 Dockerize your existing Python FastAPI application, including its PostgreSQL and Redis dependencies,
+  ✅ PASS [step 5 has 'skill']
+  ✅ PASS [step 5 has 'reason']
+  ✅ PASS [step 5 has 'estimated_hours']
+  ✅ PASS [step 5 has 'difficulty']
+
+     Step 5: AWS EC2 — 30h, Medium
+       Reason: AWS EC2 is a fundamental Infrastructure as a Service (IaaS) offering for virtual servers in the cloud. It leverages your...
+       Resources (3):
+         📚 AWS EC2 Documentation: https://docs.aws.amazon.com/ec2/
+         📚 freeCodeCamp - AWS Certified Cloud Practitioner Course (EC2 section): https://www.freecodecamp.org/news/aws-certified-cloud-practitioner-course/
+         📚 DigitalOcean - Introduction to AWS EC2: https://www.digitalocean.com/community/tutorials/an-introduction-to-amazon-ec2
+       Milestones (3):
+         🎯 Launch and securely connect to an EC2 instance via SSH.
+         🎯 Deploy a simple web server (e.g., Nginx or your Dockerized app) on an EC2 instance.
+         🎯 Configure security groups and IAM roles for EC2 instance access and permissions.
+       Project: 🔨 Deploy your Dockerized Python FastAPI application onto an AWS EC2 instance, making it accessible via
+  ✅ PASS [step 6 has 'skill']
+  ✅ PASS [step 6 has 'reason']
+  ✅ PASS [step 6 has 'estimated_hours']
+  ✅ PASS [step 6 has 'difficulty']
+
+     Step 6: AWS S3 — 30h, Easy
+       Reason: AWS S3 provides highly scalable and durable object storage, essential for static assets, backups, and data lakes. It com...
+       Resources (3):
+         📚 AWS S3 Documentation: https://docs.aws.amazon.com/s3/
+         📚 freeCodeCamp - AWS Certified Cloud Practitioner Course (S3 section): https://www.freecodecamp.org/news/aws-certified-cloud-practitioner-course/
+         📚 TutorialsPoint - AWS S3 Tutorial: https://www.tutorialspoint.com/aws/aws_s3_tutorial.htm
+       Milestones (3):
+         🎯 Create an S3 bucket and upload/download objects programmatically using the AWS SDK (e.g., Boto3).
+         🎯 Configure an S3 bucket to host a static website.
+         🎯 Implement bucket policies and IAM roles to control access to S3 objects.
+       Project: 🔨 Host your HTML/CSS/JavaScript portfolio website (from earlier projects) as a static website on AWS S
+  ✅ PASS [step 7 has 'skill']
+  ✅ PASS [step 7 has 'reason']
+  ✅ PASS [step 7 has 'estimated_hours']
+  ✅ PASS [step 7 has 'difficulty']
+
+     Step 7: AWS Lambda — 30h, Medium
+       Reason: AWS Lambda introduces serverless computing, allowing you to run code without provisioning servers. It leverages your Pyt...
+       Resources (3):
+         📚 AWS Lambda Documentation: https://docs.aws.amazon.com/lambda/
+         📚 freeCodeCamp - Serverless Applications with AWS Lambda: https://www.freecodecamp.org/news/serverless-applications-with-aws-lambda/
+         📚 Serverless.com - What is AWS Lambda?: https://www.serverless.com/aws-lambda
+       Milestones (3):
+         🎯 Create and deploy a simple Python Lambda function triggered by an API Gateway endpoint.
+         🎯 Configure a Lambda function to respond to S3 events (e.g., image upload).
+         🎯 Understand and manage Lambda environment variables, memory, and timeout settings.
+       Project: 🔨 Build a serverless API endpoint using AWS Lambda (Python) and API Gateway that processes data upload
+  ✅ PASS [step 8 has 'skill']
+  ✅ PASS [step 8 has 'reason']
+  ✅ PASS [step 8 has 'estimated_hours']
+  ✅ PASS [step 8 has 'difficulty']
+
+     Step 8: RESTful APIs — 30h, Easy
+       Reason: While you have advanced REST API development skills, this step focuses on solidifying best practices, design patterns, a...
+       Resources (3):
+         📚 RESTful API Design Handbook: https://restfulapi.net/rest-api-design-handbook/
+         📚 Postman Learning Center - API Design: https://learning.postman.com/docs/design-and-develop/api-design/
+         📚 Google Cloud API Design Guide: https://cloud.google.com/apis/design/resources
+       Milestones (3):
+         🎯 Design a comprehensive RESTful API specification using OpenAPI/Swagger for a new service.
+         🎯 Implement advanced API features like pagination, filtering, and sorting.
+         🎯 Understand and apply HATEOAS principles for discoverable APIs.
+       Project: 🔨 Design and document a RESTful API for a hypothetical online library system, including resources for 
+  ✅ PASS [step 9 has 'skill']
+  ✅ PASS [step 9 has 'reason']
+  ✅ PASS [step 9 has 'estimated_hours']
+  ✅ PASS [step 9 has 'difficulty']
+
+     Step 9: TypeScript — 30h, Medium
+       Reason: TypeScript is a superset of JavaScript that adds static typing, significantly improving code quality and maintainability...
+       Resources (3):
+         📚 TypeScript Handbook: https://www.typescriptlang.org/docs/handbook/intro.html
+         📚 freeCodeCamp - Learn TypeScript: https://www.freecodecamp.org/news/learn-typescript-beginners-guide/
+         📚 Microsoft TypeScript for JavaScript Programmers: https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html
+       Milestones (3):
+         🎯 Convert a small existing JavaScript project to TypeScript, adding appropriate type definitions.
+         🎯 Define and use custom types, interfaces, and enums for complex data structures.
+         🎯 Understand and apply advanced TypeScript features like generics and utility types.
+       Project: 🔨 Refactor your interactive to-do list application (from the JavaScript project) to use TypeScript, ad
+  ✅ PASS [step 10 has 'skill']
+  ✅ PASS [step 10 has 'reason']
+  ✅ PASS [step 10 has 'estimated_hours']
+  ✅ PASS [step 10 has 'difficulty']
+
+     Step 10: Node.js — 35h, Medium
+       Reason: Node.js allows you to use JavaScript (and TypeScript) for server-side development, enabling full-stack JavaScript capabi...
+       Resources (3):
+         📚 Node.js Documentation: https://nodejs.org/en/docs/
+         📚 freeCodeCamp - Node.js and Express.js Course: https://www.freecodecamp.org/news/learn-nodejs-full-tutorial/
+         📚 The Net Ninja - Node.js Tutorial (YouTube): https://www.youtube.com/playlist?list=PL4cUxeGkcC9jsz4LDYc6kv3IEHVaD_B_S
+       Milestones (3):
+         🎯 Build a simple REST API using Express.js to perform CRUD operations.
+         🎯 Implement user authentication and authorization using JWTs or sessions.
+         🎯 Connect a Node.js application to a PostgreSQL database and perform queries.
+       Project: 🔨 Create a backend REST API using Node.js (with Express.js and TypeScript) and PostgreSQL that manages
+  ✅ PASS [step 11 has 'skill']
+  ✅ PASS [step 11 has 'reason']
+  ✅ PASS [step 11 has 'estimated_hours']
+  ✅ PASS [step 11 has 'difficulty']
+
+     Step 11: React — 50h, Medium
+       Reason: React is a leading JavaScript library for building dynamic and efficient user interfaces. It brings together your HTML, ...
+       Resources (3):
+         📚 React Official Documentation: https://react.dev/learn
+         📚 freeCodeCamp - Front End Development Libraries (React section): https://www.freecodecamp.org/learn/front-end-development-libraries/#react
+         📚 The Net Ninja - React Tutorial (YouTube): https://www.youtube.com/playlist?list=PL4cUxeGkcC9gbbh8WE LaKzHRV8bYfQ_J
+       Milestones (3):
+         🎯 Build a component-based UI, understanding props and state management with hooks.
+         🎯 Implement client-side routing using React Router.
+         🎯 Integrate a React application with a REST API to fetch and display data.
+       Project: 🔨 Build a frontend application using React (with TypeScript) that consumes the Node.js/PostgreSQL API 
+  ✅ PASS [at least one step has resources]
+  ✅ PASS [at least one step has milestones]
+  ✅ PASS [at least one step has project_idea]
+
+  ── 5g. Dependency Graph (for visualization) ────────────────────
+  ✅ PASS [dependency_graph is dict]
+  ✅ PASS [has nodes]
+  ✅ PASS [has edges]
+  ✅ PASS [has stats]
+  ✅ PASS [nodes non-empty]
+
+  📊 Graph: 11 nodes, 5 edges
+  📊 Stats: {
+  "estimated_weeks": 17,
+  "total_edges": 5,
+  "total_hours": 340,
+  "total_nodes": 11
+}
+
+  Nodes:
+     • React (frontend_frameworks, 50h)
+     • Node.js (backend_frameworks, 35h)
+     • TypeScript (programming_languages, 30h)
+     • Docker (devops_tools, 15h)
+     • AWS EC2 (other, 30h)
+     • AWS S3 (other, 30h)
+     • AWS Lambda (other, 30h)
+     • JavaScript (programming_languages, 50h)
+     • RESTful APIs (other, 30h)
+     • html (programming_languages, 15h) [implicit]
+     • css (programming_languages, 25h) [implicit]
+
+  Edges (prerequisites):
+     JavaScript ──→ React
+     JavaScript ──→ Node.js
+     JavaScript ──→ TypeScript
+     html ──→ React
+     css ──→ React
+  ✅ PASS [node has 'id']
+  ✅ PASS [node has 'group']
+  ✅ PASS [node has 'estimated_hours']
+
+  ── 5h. Explanation ─────────────────────────────────────────────
+  ✅ PASS [explanation non-empty]
+  ✅ PASS [explanation is substantial (>200 chars)]
+
+  💬 Explanation preview:
+     Welcome aboard! We are absolutely delighted to have you join our team. Your current skillset provides an incredibly strong foundation, and we're particularly impressed by your expert proficiency in Python, alongside your solid command of Flask, FastAPI, PostgreSQL, SQL, Redis, pytest, Unit Testing, Integration Testing, Linux, Bash, Git, Pandas, NumPy, REST API Development, System Design, Data Processing, and Software Deployment. This robust background in backend development, data handling, and s
+     ... (3457 total chars)
+
+  ── 5i. Meta / Statistics ───────────────────────────────────────
+  ✅ PASS [meta is dict]
+  ✅ PASS [has match_percentage]
+  ✅ PASS [has total_learning_hours]
+  ✅ PASS [has total_learning_weeks]
+  ✅ PASS [has total_resume_skills]
+  ✅ PASS [has total_required_skills]
+  ✅ PASS [has total_gaps]
+  ✅ PASS [has total_learning_steps]
+
+  📊 Full Meta:
+     Match:    25.0%
+     Skills:   20 found in resume
+     Required: 12 by JD
+     Optional: 6 by JD
+     Gaps:     9
+     Steps:    11
+     Hours:    340h
+     Weeks:    ~17 weeks (at 20h/week)
+
+======================================================================
+  6. GET /session/69bd9553fa5de7e255aec643
+======================================================================
+  Status: 200
+  ✅ PASS [status code]
+  ✅ PASS [success flag]
+  ✅ PASS [session present]
+  ✅ PASS [session id matches]
+  ✅ PASS [session has role_title]
+  ✅ PASS [session has dependency_graph]
+  ✅ PASS [session has stats]
+  ✅ PASS [session has created_at]
+  📦 Session retrieved — role: Full Stack Engineer
+  📦 Created: 2026-03-20T18:43:31.600000
+  📦 Match: 25.0%
+
+======================================================================
+  7. GET /sessions
+======================================================================
+  Status: 200
+  ✅ PASS [status code]
+  ✅ PASS [has sessions list]
+  ✅ PASS [has count]
+  📦 Total sessions in DB: 3
+     • [69bd9553...] Full Stack Engineer — 20 skills — 2026-03-20T18:43:31.600000
+     • [69bd9359...] Full Stack Engineer — 18 skills — 2026-03-20T18:35:05.790000
+     • [69bd8e97...] N/A — 19 skills — 2026-03-20T18:14:47.816000
+  ✅ PASS [resume_text excluded from list]
+  ✅ PASS [jd_text excluded from list]
+  ✅ PASS [explanation excluded from list]
+  ✅ PASS [dependency_graph excluded from list]
+
+══════════════════════════════════════════════════════════════════════
+  📊 Test Results: 141/141 passed, 0 failed
+  🎉 All tests passed!
+══════════════════════════════════════════════════════════════════════
