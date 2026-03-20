@@ -19,19 +19,19 @@ export function RoleCard({ role, index = 0 }: RoleCardProps) {
             transition={{ delay: index * 0.08, duration: 0.4 }}
         >
             <Link
-                href={`/learning/career-paths/${role.id}`}
-                className="group block bg-white rounded-xl border border-gray-100 p-5 hover:shadow-lg hover:border-[#0a66c2]/20 transition-all duration-300"
+                href={`/career-paths/${role.id}`}
+                className="group block bg-white dark:bg-card rounded-xl border border-gray-100 dark:border-border p-5 hover:shadow-lg hover:border-primary/20 transition-all duration-300"
             >
                 <div className="flex items-start justify-between mb-3">
                     <span className="text-3xl">{role.icon}</span>
-                    <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-[#0a66c2] group-hover:translate-x-1 transition-all" />
+                    <ArrowRight className="w-4 h-4 text-gray-300 group-hover:text-primary group-hover:translate-x-1 transition-all" />
                 </div>
-                <h3 className="text-[15px] font-semibold text-gray-900 group-hover:text-[#0a66c2] transition-colors">
+                <h3 className="text-[15px] font-semibold text-gray-900 dark:text-foreground group-hover:text-primary transition-colors">
                     {role.title}
                 </h3>
                 <p className="text-xs text-gray-500 mt-1 line-clamp-2">{role.description}</p>
                 <div className="mt-3 flex items-center gap-1.5">
-                    <span className="text-[11px] font-medium text-[#0a66c2] bg-[#e8f1fd] px-2 py-0.5 rounded-full">
+                    <span className="text-[11px] font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">
                         {role.courseCount} courses
                     </span>
                 </div>
@@ -54,8 +54,8 @@ export function RoleGuideCard({ title, index = 0 }: RoleGuideCardProps) {
             transition={{ delay: index * 0.03, duration: 0.3 }}
         >
             <Link
-                href={`/learning/career-paths/${title.toLowerCase().replace(/\s+/g, '-')}`}
-                className="block px-4 py-3 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 hover:border-[#0a66c2] hover:text-[#0a66c2] hover:bg-[#e8f1fd]/50 transition-all"
+                href={`/career-paths/${title.toLowerCase().replace(/\s+/g, '-')}`}
+                className="block px-4 py-3 border border-gray-200 dark:border-border rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all"
             >
                 {title}
             </Link>

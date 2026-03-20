@@ -48,7 +48,7 @@ export default function SignupPage() {
     try {
       await signup(data.email, data.password, `${data.firstName} ${data.lastName}`);
       toast({ title: 'Account Created!', description: 'Welcome to Parichay.' });
-      router.push('/create');
+      router.push('/');
     } catch (error: any) {
       const errorMessage = error.code ? error.code.replace('auth/', '').replace(/-/g, ' ') : error.message;
       setSignupError(errorMessage);

@@ -41,7 +41,7 @@ export default function LoginPage() {
     try {
       await login(data.email, data.password);
       toast({ title: 'Login Successful', description: "Welcome back!" });
-      router.push('/learning');
+      router.push('/');
     } catch (error: any) {
       const errorMessage = error.code ? error.code.replace('auth/', '').replace(/-/g, ' ') : error.message;
       setLoginError(errorMessage);

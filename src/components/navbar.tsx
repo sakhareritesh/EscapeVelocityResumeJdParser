@@ -12,6 +12,7 @@ export function Navbar() {
   const pathname = usePathname();
   const { user, loading } = useAuth();
 
+  // Hide navbar on these routes (they have their own navigation)
   const hideNavbar =
     pathname.startsWith('/create') ||
     pathname.startsWith('/login') ||
@@ -19,10 +20,20 @@ export function Navbar() {
     pathname.startsWith('/spin') ||
     pathname.startsWith('/admin') ||
     pathname.startsWith('/user/') ||
-    pathname.startsWith('/learning');
+    pathname.startsWith('/learning') ||
+    pathname.startsWith('/career-paths') ||
+    pathname.startsWith('/my-career-plan') ||
+    pathname.startsWith('/my-content') ||
+    pathname.startsWith('/browse') ||
+    pathname.startsWith('/ai-coaching') ||
+    pathname.startsWith('/certifications') ||
+    pathname.startsWith('/create') ||
+    pathname.startsWith('/spin') ||
+    pathname.startsWith('/profile') ||
+    pathname.startsWith('/ai-matcher');
 
-
-  if (hideNavbar) {
+  // Also hide when user is logged in and on home page (dashboard shown)
+  if (hideNavbar || (user && pathname === '/')) {
     return null;
   }
 
@@ -54,7 +65,7 @@ export function Navbar() {
             <Loader2 className="h-6 w-6 animate-spin text-muted-foreground" />
           ) : user ? (
             <Button asChild>
-              <Link href="/learning">Go to Dashboard</Link>
+              <Link href="/">Go to Dashboard</Link>
             </Button>
           ) : (
             <>

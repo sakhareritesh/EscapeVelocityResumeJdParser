@@ -20,8 +20,8 @@ export default function DashboardRedirect() {
       return;
     }
 
-    // Redirect to learning dashboard
-    router.push('/learning');
+    // Redirect to home dashboard
+    router.push('/');
 
   }, [user, loading, router]);
 

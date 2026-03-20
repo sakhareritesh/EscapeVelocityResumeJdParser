@@ -21,7 +21,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { DashboardNavbar } from '@/components/dashboard-navbar';
 
 const segments = [
   { value: 10, label: '10 PP', color: 'hsl(142 71% 45%)' },
@@ -43,17 +42,10 @@ const goodies = [
 
 export default function SpinTheWheelPage() {
     const { user, userProfile, loading, fetchUserProfile } = useAuth();
-    const router = useRouter();
     const { toast } = useToast();
     const [isSpinning, setIsSpinning] = useState(false);
     const [rotation, setRotation] = useState(0);
     const [spinsLeft, setSpinsLeft] = useState(2);
-
-    useEffect(() => {
-        if (!loading && !user) {
-            router.push('/login');
-        }
-    }, [user, loading, router]);
 
      useEffect(() => {
         if (userProfile) {
@@ -103,15 +95,14 @@ export default function SpinTheWheelPage() {
     };
     
     return (
-        <div className="min-h-screen bg-background text-foreground relative overflow-hidden flex flex-col">
-            <DashboardNavbar />
+        <div className="relative overflow-hidden">
              <div className="absolute inset-0 z-0 opacity-5 dark:opacity-[0.02]">
                 <Coins className="absolute top-[10%] left-[15%] w-16 h-16 animate-float text-muted-foreground" />
                 <Coins className="absolute top-[70%] left-[5%] w-8 h-8 animate-float animation-delay-2000 text-muted-foreground" />
                 <Star className="absolute top-[50%] right-[10%] w-24 h-24 animate-float animation-delay-4000 text-muted-foreground" />
             </div>
             
-            <main className="container mx-auto px-4 py-8 relative z-10 flex-grow">
+            <div className="relative z-10">
                 <div className="text-center my-12">
                     <h1 className="text-5xl font-extrabold tracking-tight animated-gradient">Spin To Win</h1>
                     <p className="text-muted-foreground mt-2">You have <span className="font-bold text-foreground">{spinsLeft}</span> spin{spinsLeft !== 1 && 's'} left today. Win exclusive PP Tokens!</p>
@@ -255,7 +246,7 @@ export default function SpinTheWheelPage() {
                         ))}
                     </div>
                 </section>
-            </main>
+            </div>
         </div>
     );
 }

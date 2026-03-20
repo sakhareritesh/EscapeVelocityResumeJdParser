@@ -7,7 +7,7 @@ import { LearningSidebar } from '@/components/learning/LearningSidebar';
 import { LearningNavbar } from '@/components/learning/LearningNavbar';
 import { Loader2 } from 'lucide-react';
 
-export default function LearningLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     const { user, loading } = useAuth();
     const router = useRouter();
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -20,8 +20,8 @@ export default function LearningLayout({ children }: { children: React.ReactNode
 
     if (loading) {
         return (
-            <div className="flex items-center justify-center min-h-screen bg-[#f3f2ef]">
-                <Loader2 className="w-8 h-8 text-[#0a66c2] animate-spin" />
+            <div className="flex items-center justify-center min-h-screen bg-background">
+                <Loader2 className="w-8 h-8 text-primary animate-spin" />
             </div>
         );
     }
@@ -29,7 +29,7 @@ export default function LearningLayout({ children }: { children: React.ReactNode
     if (!user) return null;
 
     return (
-        <div className="flex h-screen bg-[#f3f2ef] overflow-hidden">
+        <div className="flex h-screen bg-[#f8f7f4] dark:bg-background overflow-hidden">
             <LearningSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
                 <LearningNavbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
