@@ -12,7 +12,7 @@ export default function DashboardRedirect() {
 
   useEffect(() => {
     if (loading) {
-      return; 
+      return;
     }
 
     if (!user) {
@@ -20,9 +20,9 @@ export default function DashboardRedirect() {
       return;
     }
 
-    // Always redirect to the user profile page now
-    router.push('/user/profile');
-    
+    // Redirect to learning dashboard
+    router.push('/learning');
+
   }, [user, loading, router]);
 
   return (
