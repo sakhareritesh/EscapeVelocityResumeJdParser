@@ -6,7 +6,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Loader2, UploadCloud, Github, Linkedin, Plus, FileText, Info, Rocket } from 'lucide-react';
-import { DashboardNavbar } from '@/components/dashboard-navbar';
 import { Stepper } from '@/components/stepper';
 import { useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -23,10 +22,8 @@ export default function CreatePage() {
   } = useUnifiedCreateForm();
 
   return (
-    <div className="min-h-screen bg-muted/40">
-      <DashboardNavbar />
-      <main className="container mx-auto px-4 py-8">
-        <Stepper currentStep={1} />
+    <div>
+      <Stepper currentStep={1} />
         <div className="text-center my-12">
             <h1 className="text-4xl font-bold tracking-tight">Extract Your Professional Data</h1>
             <p className="text-muted-foreground mt-2">Import from GitHub, LinkedIn, or upload your resume. Or jump to manual entry.</p>
@@ -138,7 +135,6 @@ export default function CreatePage() {
                 <Button variant="outline" onClick={() => router.push('/create/editor')}>Manual Entry</Button>
             </CardContent>
         </Card>
-      </main>
     </div>
   );
 }

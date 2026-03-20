@@ -1,6 +1,6 @@
 'use client';
 
-import { Search, Bell, Menu, LogOut, User, Settings } from 'lucide-react';
+import { Search, Bell, Menu, LogOut, User, Settings, Wand2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -14,6 +14,7 @@ import {
 import { useAuth } from '@/context/auth-context';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 interface LearningNavbarProps {
     onMenuToggle: () => void;
@@ -38,12 +39,12 @@ export function LearningNavbar({ onMenuToggle }: LearningNavbarProps) {
         : 'U';
 
     return (
-        <header className="sticky top-0 z-30 h-14 bg-white border-b border-gray-200 flex items-center px-4 gap-4 shrink-0">
+        <header className="sticky top-0 z-30 h-14 bg-white dark:bg-card border-b border-gray-200 dark:border-border flex items-center px-4 gap-4 shrink-0">
             {/* Mobile menu button */}
             <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden h-9 w-9 text-gray-600"
+                className="lg:hidden h-9 w-9 text-gray-600 dark:text-gray-300"
                 onClick={onMenuToggle}
             >
                 <Menu className="h-5 w-5" />
@@ -55,14 +56,17 @@ export function LearningNavbar({ onMenuToggle }: LearningNavbarProps) {
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                     <Input
                         placeholder="Search for skills, courses, or topics..."
-                        className="pl-10 h-9 bg-gray-50 border-gray-200 text-sm rounded-lg focus-visible:ring-[#0a66c2] focus-visible:ring-1 focus-visible:border-[#0a66c2]"
+                        className="pl-10 h-9 bg-gray-50 dark:bg-muted border-gray-200 dark:border-border text-sm rounded-lg focus-visible:ring-primary focus-visible:ring-1 focus-visible:border-primary"
                     />
                 </div>
             </div>
 
             <div className="flex items-center gap-1">
+                {/* Theme Toggle */}
+                <ThemeToggle />
+
                 {/* Notifications */}
-                <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-600 relative">
+                <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-600 dark:text-gray-300 relative">
                     <Bell className="h-[18px] w-[18px]" />
                     <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
                 </Button>
@@ -72,11 +76,11 @@ export function LearningNavbar({ onMenuToggle }: LearningNavbarProps) {
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-9 px-2 gap-2">
                             <Avatar className="h-7 w-7">
-                                <AvatarFallback className="bg-[#0a66c2] text-white text-xs font-semibold">
+                                <AvatarFallback className="bg-primary text-primary-foreground text-xs font-semibold">
                                     {initials}
                                 </AvatarFallback>
                             </Avatar>
-                            <span className="text-sm font-medium text-gray-700 hidden sm:block">
+                            <span className="text-sm font-medium text-gray-700 dark:text-gray-200 hidden sm:block">
                                 {userProfile?.name || 'User'}
                             </span>
                         </Button>
@@ -84,7 +88,7 @@ export function LearningNavbar({ onMenuToggle }: LearningNavbarProps) {
                     <DropdownMenuContent align="end" className="w-56">
                         <div className="px-3 py-2">
                             <p className="text-sm font-medium">{userProfile?.name}</p>
-                            <p className="text-xs text-gray-500">{userProfile?.email}</p>
+                            <p className="text-xs text-gray-500 dark:text-muted-foreground">{userProfile?.email}</p>
                         </div>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem asChild>

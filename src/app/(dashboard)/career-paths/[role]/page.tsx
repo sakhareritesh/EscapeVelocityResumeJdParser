@@ -24,7 +24,7 @@ export default function CareerPathDetailPage() {
         <div className="space-y-8">
             {/* Back link */}
             <Link
-                href="/learning/career-paths"
+                href="/career-paths"
                 className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors"
             >
                 <ArrowLeft className="w-4 h-4" />
