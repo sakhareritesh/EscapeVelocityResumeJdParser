@@ -41,7 +41,7 @@ export default function LoginPage() {
     try {
       await login(data.email, data.password);
       toast({ title: 'Login Successful', description: "Welcome back!" });
-      router.push('/create');
+      router.push('/learning');
     } catch (error: any) {
       const errorMessage = error.code ? error.code.replace('auth/', '').replace(/-/g, ' ') : error.message;
       setLoginError(errorMessage);
@@ -56,7 +56,7 @@ export default function LoginPage() {
       <Card className="mx-auto max-w-sm w-full bg-background">
         <CardHeader>
           <div className="flex justify-center mb-4">
-             <Wand2 className="w-12 h-12 text-primary" />
+            <Wand2 className="w-12 h-12 text-primary" />
           </div>
           <CardTitle className="text-2xl text-center">User Login</CardTitle>
           <CardDescription className="text-center">
@@ -83,16 +83,16 @@ export default function LoginPage() {
                 </Link>
               </div>
               <Input id="password" type="password" {...form.register('password')} />
-               {form.formState.errors.password && <p className="text-destructive text-sm mt-1">{form.formState.errors.password.message}</p>}
+              {form.formState.errors.password && <p className="text-destructive text-sm mt-1">{form.formState.errors.password.message}</p>}
             </div>
 
             {loginError && (
-                <Alert variant="destructive">
-                    <AlertCircle className="h-4 w-4" />
-                    <AlertDescription className="font-semibold capitalize">
-                        {loginError}
-                    </AlertDescription>
-                </Alert>
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription className="font-semibold capitalize">
+                  {loginError}
+                </AlertDescription>
+              </Alert>
             )}
 
             <Button type="submit" className="w-full" disabled={isLoading}>
