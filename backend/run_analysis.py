@@ -1,9 +1,9 @@
 """
-run_analysis.py — Local file-based analysis runner
+run_analysis.py - Local file-based analysis runner
 ====================================================
 Reads resume and JD files from:
-  src/resume/   — PDF, DOCX, or TXT resume files
-  src/jd/       — PDF, DOCX, or TXT job description files
+  src/resume/   - PDF, DOCX, or TXT resume files
+  src/jd/       - PDF, DOCX, or TXT job description files
 
 Sends them to the running API at http://localhost:5000/analyze
 and prints the full analysis output in a clean, readable format.
@@ -139,7 +139,7 @@ def pick_file(directory: str, filename: str | None, label: str) -> str:
     else:
         chosen = files[0]
         if len(files) > 1:
-            warn(f"Multiple {label} files found — using: {C.CYAN}{chosen}{C.RESET}")
+            warn(f"Multiple {label} files found - using: {C.CYAN}{chosen}{C.RESET}")
             info(f"Others: {', '.join(files[1:])}  (use -r / -j to specify)")
 
     return os.path.join(directory, chosen)
@@ -222,7 +222,7 @@ def print_results(data: dict):
     role_info = data.get("role_info", {})
 
     # ── Header ──────────────────────────────────────────────────────────────────
-    header("🧠  AI Adaptive Onboarding Engine — Analysis Report")
+    header("🧠  AI Adaptive Onboarding Engine - Analysis Report")
 
     # ── Role Summary ─────────────────────────────────────────────────────────────
     section("Target Role")
@@ -264,7 +264,7 @@ def print_results(data: dict):
             yrs = s.get("years_experience", 0)
             ctx = s.get("context", "")
             yrs_str = f"{C.DIM}({yrs}y){C.RESET} " if yrs else ""
-            ctx_str = f"{C.DIM}— {ctx[:60]}{C.RESET}" if ctx else ""
+            ctx_str = f"{C.DIM}- {ctx[:60]}{C.RESET}" if ctx else ""
             print(f"       {icon} {color}{s.get('name','?')}{C.RESET} "
                   f"{s.get('level','?')} {yrs_str}{ctx_str}")
 
@@ -414,7 +414,7 @@ Examples:
     args = parser.parse_args()
 
     print(f"\n{C.BOLD}{'═' * 72}{C.RESET}")
-    print(f"{C.BOLD}  🚀  AI Adaptive Onboarding Engine — File Runner{C.RESET}")
+    print(f"{C.BOLD}  🚀  AI Adaptive Onboarding Engine - File Runner{C.RESET}")
     print(f"{C.DIM}       API: {args.url}{C.RESET}")
     print(f"{C.BOLD}{'═' * 72}{C.RESET}")
 
@@ -445,7 +445,7 @@ Examples:
     print(f"     {C.CYAN}📋 JD     :{C.RESET} {jd_name}  "
           f"{C.DIM}({os.path.getsize(jd_path)/1024:.1f} KB){C.RESET}")
 
-    print(f"\n  {C.YELLOW}⏳ Analysing — this takes 30–90 seconds "
+    print(f"\n  {C.YELLOW}⏳ Analysing - this takes 30–90 seconds "
           f"(Gemini is thinking)...{C.RESET}")
 
     # ── Send to API ───────────────────────────────────────────────────────────────

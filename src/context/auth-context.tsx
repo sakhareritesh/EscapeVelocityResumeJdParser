@@ -7,7 +7,7 @@ import { auth, db } from '@/lib/firebase';
 import { ref, set, get, update, query, equalTo, orderByChild } from "firebase/database";
 import shortid from 'shortid';
 
-const FREE_PLAN_USAGE = { analysis: 5, downloads: 1, generations: 2 };
+const FREE_PLAN_USAGE = { analysis: 5, downloads: 5, generations: 5 };
 const MONTHLY_PLAN_USAGE = { analysis: 100, downloads: 20, generations: 5 };
 const YEARLY_PLAN_USAGE = { analysis: 1500, downloads: 300, generations: 50 };
 

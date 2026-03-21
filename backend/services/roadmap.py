@@ -385,12 +385,12 @@ The learning order has been determined by prerequisite analysis. Your task is to
 enrich each step with practical learning details.
 
 For EACH skill in the order given, provide:
-1. "skill" — exact name as provided
-2. "reason" — why this skill is placed here and how it builds on prior knowledge (1-2 sentences)
-3. "difficulty" — "Easy", "Medium", or "Hard" (relative to candidate's background)
-4. "resources" — exactly 3 high-quality free learning resources (name + URL)
-5. "milestones" — exactly 3 practical milestones to prove competency
-6. "project_idea" — one hands-on project to solidify the skill
+1. "skill" - exact name as provided
+2. "reason" - why this skill is placed here and how it builds on prior knowledge (1-2 sentences)
+3. "difficulty" - "Easy", "Medium", or "Hard" (relative to candidate's background)
+4. "resources" - exactly 3 high-quality free learning resources (name + URL)
+5. "milestones" - exactly 3 practical milestones to prove competency
+6. "project_idea" - one hands-on project to solidify the skill
 
 Return ONLY a valid JSON object (no markdown, no extra text):
 {{
@@ -498,7 +498,7 @@ def generate_explanation(
             gap_names.append(str(g))
 
     path_summary = "\n".join(
-        [f"  Step {s['step']}: {s['skill']} ({s.get('estimated_hours', '?')}h) — {s.get('reason', '')}"
+        [f"  Step {s['step']}: {s['skill']} ({s.get('estimated_hours', '?')}h) - {s.get('reason', '')}"
          for s in learning_path]
     ) or "  No learning steps generated (no skill gaps found)"
 
@@ -511,7 +511,7 @@ Here is their profile:
 
 Current Skills: {current_skills_str}
 Job Required Skills: {', '.join(jd_required_skills) or 'Not specified'}
-Skill Gaps Identified: {', '.join(gap_names) or 'None — fully qualified!'}
+Skill Gaps Identified: {', '.join(gap_names) or 'None - fully qualified!'}
 Total Learning Time Estimate: ~{total_hours} hours (~{total_weeks} weeks at 20h/week)
 
 Generated Learning Path:
@@ -525,7 +525,7 @@ Write a clear, encouraging, and professional explanation (4-5 paragraphs) coveri
 5. Motivational closing with the estimated timeline and encouragement
 
 Be specific, practical, and encouraging. Reference their actual skills by name.
-Write in plain English — no bullet points, no headers, no markdown formatting.
+Write in plain English - no bullet points, no headers, no markdown formatting.
 Just well-structured paragraphs.
 """
 

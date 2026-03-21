@@ -135,21 +135,21 @@ including programming languages, frameworks, libraries, tools, platforms, databa
 methodologies, cloud services, and domain expertise.
 
 For each skill, provide:
-1. "name" — the industry-standard name (e.g., "React" not "ReactJS")
-2. "level" — proficiency based on context clues:
+1. "name" - the industry-standard name (e.g., "React" not "ReactJS")
+2. "level" - proficiency based on context clues:
    - "Beginner": mentioned once, no project context, coursework only
    - "Intermediate": used in 1-2 projects, 1-3 years implied  
    - "Advanced": led projects involving this, 3-5 years, solid expertise
    - "Expert": primary technology, 5+ years, extensive leadership/contributions
-3. "years_experience" — estimated years of experience (integer, 0 if unclear)
-4. "context" — brief note on HOW they used it (max 15 words)
+3. "years_experience" - estimated years of experience (integer, 0 if unclear)
+4. "context" - brief note on HOW they used it (max 15 words)
 
 IMPORTANT RULES:
 - Extract skills from ALL sections: experience, education, projects, certifications
 - Include soft skills only if they are technical (e.g., "System Design", "Technical Writing")
 - Standardize names (e.g., "JS" → "JavaScript", "k8s" → "Kubernetes")
-- Do NOT duplicate skills — merge if mentioned multiple times
-- Be thorough — a typical experienced developer resume should yield 15-30+ skills
+- Do NOT duplicate skills - merge if mentioned multiple times
+- Be thorough - a typical experienced developer resume should yield 15-30+ skills
 
 Return ONLY a valid JSON object with this exact structure (no markdown):
 {{
@@ -267,9 +267,9 @@ def parse_job_description(jd_text: str) -> dict:
     prompt = f"""You are an expert technical recruiter and job market analyst.
 
 Carefully analyze the following job description and extract:
-1. REQUIRED skills — explicitly stated as must-have, required, or mandatory
-2. OPTIONAL skills — listed as nice-to-have, preferred, bonus, or advantageous
-3. Role metadata — title, seniority level, domain
+1. REQUIRED skills - explicitly stated as must-have, required, or mandatory
+2. OPTIONAL skills - listed as nice-to-have, preferred, bonus, or advantageous
+3. Role metadata - title, seniority level, domain
 
 Include: programming languages, frameworks, libraries, tools, platforms, databases,
 cloud services, methodologies, soft skills if technical in nature.

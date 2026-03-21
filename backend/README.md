@@ -1,6 +1,6 @@
-# 🧠 AI Adaptive Onboarding Engine — Backend
+# 🧠 AI Adaptive Onboarding Engine - Backend
 
-A production-ready Flask backend that uses **Gemini 2.5 Flash** to analyze candidate resumes against job descriptions, identify skill gaps, and generate **Graph-Based Personalized Learning Roadmaps**. 
+A production-ready Flask backend that uses **Gemini 2.5 Flash** to analyze candidate resumes against job descriptions, identify skill gaps, and generate **Graph-Based Personalized Learning Roadmaps**.
 
 This repository was built to solve the challenge of static, "one-size-fits-all" corporate onboarding by dynamically mapping optimal, personalized training pathways based on a candidate's existing baseline.
 
@@ -9,19 +9,25 @@ This repository was built to solve the challenge of static, "one-size-fits-all" 
 ## ✨ Key Features & Architecture
 
 ### 1. 📄 Multi-Strategy Intelligent Document Parsing
-Traditional parsing (like PyPDF2) easily breaks on multi-column or scanned resumes. We built a robust 3-tier cascade extraction strategy:
-*   **Strategy 1 (pdfplumber)**: Excellent for complex, multi-column layouts and tables.
-*   **Strategy 2 (PyPDF2)**: Reliable fallback for simple, single-column text PDFs.
-*   **Strategy 3 (Gemini Multimodal)**: A nuclear fallback that passes raw PDF bytes to Gemini for native OCR and visual extraction of scanned or image-heavy documents.
 
-### 2. 🧬 O*NET-Inspired Skill Taxonomy & Extraction
+Traditional parsing (like PyPDF2) easily breaks on multi-column or scanned resumes. We built a robust 3-tier cascade extraction strategy:
+
+- **Strategy 1 (pdfplumber)**: Excellent for complex, multi-column layouts and tables.
+- **Strategy 2 (PyPDF2)**: Reliable fallback for simple, single-column text PDFs.
+- **Strategy 3 (Gemini Multimodal)**: A nuclear fallback that passes raw PDF bytes to Gemini for native OCR and visual extraction of scanned or image-heavy documents.
+
+### 2. 🧬 O\*NET-Inspired Skill Taxonomy & Extraction
+
 Instead of raw keyword matching, skills are extracted into rich JSON objects with:
-*   Standardized categorization into 15+ domains (e.g., `programming_languages`, `cloud_services`).
-*   Inferred **Years of Experience** and **Project Context**.
-*   Fuzzy-logic alias matching (e.g., `JS` → `JavaScript`, `k8s` → `Kubernetes`).
+
+- Standardized categorization into 15+ domains (e.g., `programming_languages`, `cloud_services`).
+- Inferred **Years of Experience** and **Project Context**.
+- Fuzzy-logic alias matching (e.g., `JS` → `JavaScript`, `k8s` → `Kubernetes`).
 
 ### 3. 🗺️ Graph-Based Adaptive Pathing (The Algorithm)
+
 Using **NetworkX**, the engine builds a Directed Acyclic Graph (DAG) for the learning path:
+
 1.  **Dependency Mapping**: Automatically injects missing prerequisites (e.g., you can't learn Docker without basic Linux).
 2.  **Topological Sort**: Prioritizes foundational skills first, ensuring candidates learn in a logical, impossible-to-fail order.
 3.  **Adaptive Weighting**: Estimates learning hours, natively reducing projected time by 40% if the candidate possesses a highly related skill.
@@ -34,7 +40,7 @@ Using **NetworkX**, the engine builds a Directed Acyclic Graph (DAG) for the lea
 backend/
 ├── app.py                  # Flask application factory & entry point
 ├── routes/
-│   └── analyze.py          # Core endpoints: POST /analyze, GET /sessions 
+│   └── analyze.py          # Core endpoints: POST /analyze, GET /sessions
 ├── services/
 │   ├── gemini_service.py   # Gemini LLM initialization, config, and retry logic
 │   ├── parser.py           # Resume & JD parsing, O*NET taxonomy, Gap calculation
@@ -55,18 +61,22 @@ backend/
 ## ⚙️ Setup Instructions
 
 ### 1. Clone & create virtualenv
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate       # Windows: venv\Scripts\activate
 ```
 
 ### 2. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 3. Configure `.env`
+
 Create a `.env` file in the root based on `.env.example`:
+
 ```env
 # Get an API key from https://aistudio.google.com
 GEMINI_API_KEY=your_gemini_api_key_here
@@ -82,12 +92,15 @@ PORT=5000
 ```
 
 ### 4. Run the API Server
+
 ```bash
 python app.py
 ```
 
 ### 5. Run the Test Suite
+
 The testing script validates the graph-building algorithm, metadata extraction, endpoint schemas, and DB saving:
+
 ```bash
 python test_api.py
 ```
@@ -97,7 +110,9 @@ python test_api.py
 ## 🔌 API Reference
 
 ### `GET /upload`
+
 Serves a responsive, dark-themed HTML UI for testing the flow directly in the browser. Features a 2-step workflow:
+
 1. Upload & Parse (instant text extraction).
 2. Review & Analyze (run full Gemini AI pipeline).
 
@@ -108,10 +123,12 @@ Serves a responsive, dark-themed HTML UI for testing the flow directly in the br
 Instantly extracts raw text from Resume and JD files (PDF/DOCX/TXT) using our 3-tier OCR strategy. **Does not hit the AI / LLM.**
 
 **Input** (`multipart/form-data`):
-*   `resume_file`: Candidate resume document
-*   `jd_file`: Job description document
+
+- `resume_file`: Candidate resume document
+- `jd_file`: Job description document
 
 **Response** (`200 OK`):
+
 ```json
 {
   "resume": {
@@ -136,10 +153,12 @@ Instantly extracts raw text from Resume and JD files (PDF/DOCX/TXT) using our 3-
 Analyzes a resume against a job description, calculates skill gaps, and generates a rich adaptive learning DAG path using Gemini LLM.
 
 **Input** (`multipart/form-data`):
-*   `resume_file` / `resume_text`: PDF/DOCX/TXT file OR raw string
-*   `jd_file` / `jd_text`: PDF/DOCX/TXT file OR raw string
+
+- `resume_file` / `resume_text`: PDF/DOCX/TXT file OR raw string
+- `jd_file` / `jd_text`: PDF/DOCX/TXT file OR raw string
 
 **Response** (`200 OK`):
+
 ```json
 {
   "success": true,
@@ -151,19 +170,19 @@ Analyzes a resume against a job description, calculates skill gaps, and generate
   },
   "resume_skills": [
     {
-       "name": "Python", 
-       "level": "Advanced", 
-       "category": "programming_languages", 
-       "years_experience": 4, 
+       "name": "Python",
+       "level": "Advanced",
+       "category": "programming_languages",
+       "years_experience": 4,
        "context": "Built REST APIs"
     }
   ],
   "jd_skills": [ ... ],
   "skill_gap": [
     {
-       "skill": "React", 
-       "priority": "high", 
-       "category": "frontend_frameworks", 
+       "skill": "React",
+       "priority": "high",
+       "category": "frontend_frameworks",
        "candidate_has_related": ["JavaScript"]
     }
   ],
@@ -200,19 +219,23 @@ Analyzes a resume against a job description, calculates skill gaps, and generate
 ---
 
 ### `GET /sessions`
+
 List the 20 most recent sessions (excludes heavy blobs like raw resume text or large DAG arrays for lightning-fast frontend loading).
 
 ---
 
 ### `GET /session/<session_id>`
+
 Retrieve a previously generated session containing the full dependency graph and learning path.
 
 ---
 
 ### `GET /health`
+
 Returns the status of the API and verifies connectivity with MongoDB.
 
 **Response** (`200 OK`):
+
 ```json
 {
   "database": "connected",
@@ -247,7 +270,7 @@ stats             object      Match % and Hour/Week estimates
 
 All errors return JSON in standard format: `{"success": false, "error": "Human-readable error"}`
 
-*   **400**: Bad input (missing fields, un-extractable file bytes).
-*   **404**: Endpoint/Session not found.
-*   **413**: File too large (>10 MB).
-*   **500**: Gemini API exhaustion or timeout.
+- **400**: Bad input (missing fields, un-extractable file bytes).
+- **404**: Endpoint/Session not found.
+- **413**: File too large (>10 MB).
+- **500**: Gemini API exhaustion or timeout.

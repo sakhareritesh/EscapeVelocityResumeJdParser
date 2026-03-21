@@ -17,20 +17,20 @@ Senior Software Engineer | john@example.com | github.com/johndoe
 
 EXPERIENCE
 
-Backend Engineer — TechCorp (2020–2024)
+Backend Engineer - TechCorp (2020–2024)
 • Built and maintained REST APIs using Python (Flask, FastAPI)
 • Designed PostgreSQL schemas and wrote complex SQL queries
 • Implemented Redis caching, reducing response times by 40%
 • Wrote unit and integration tests with pytest (85% coverage)
 • Deployed services on Linux servers using Bash scripts
 
-Junior Developer — StartupXYZ (2018–2020)
+Junior Developer - StartupXYZ (2018–2020)
 • Developed internal tools in Python
 • Worked with Git, GitHub, and basic CI/CD pipelines
 • Used Pandas and NumPy for data processing scripts
 
 EDUCATION
-B.S. Computer Science — State University (2018)
+B.S. Computer Science - State University (2018)
 
 SKILLS
 Python (Advanced), Flask (Intermediate), FastAPI (Intermediate),
@@ -39,19 +39,19 @@ Linux/Bash (Intermediate), Pandas (Intermediate), pytest (Intermediate)
 """
 
 SAMPLE_JD = """
-Full Stack Engineer — GrowthStartup
+Full Stack Engineer - GrowthStartup
 
 We are building the next generation of SaaS tooling and need a passionate
 Full Stack Engineer to join our team.
 
 REQUIRED SKILLS
-• React (3+ years) — building complex SPAs
-• Node.js — backend services and REST APIs
-• TypeScript — strict typing across the stack
-• Python — data pipelines and ML integrations
-• PostgreSQL — schema design and query optimization
-• Docker — containerizing services
-• AWS (EC2, S3, Lambda) — cloud deployment
+• React (3+ years) - building complex SPAs
+• Node.js - backend services and REST APIs
+• TypeScript - strict typing across the stack
+• Python - data pipelines and ML integrations
+• PostgreSQL - schema design and query optimization
+• Docker - containerizing services
+• AWS (EC2, S3, Lambda) - cloud deployment
 
 NICE TO HAVE
 • GraphQL
@@ -137,7 +137,7 @@ def test_root():
 
 
 def test_missing_input():
-    print_section("3. POST /analyze — missing input error")
+    print_section("3. POST /analyze - missing input error")
     r = requests.post(f"{BASE_URL}/analyze", data={}, timeout=15)
     data = r.json()
     print(f"  Status: {r.status_code}")
@@ -148,7 +148,7 @@ def test_missing_input():
 
 
 def test_invalid_session():
-    print_section("4. GET /session/invalid-id — error handling")
+    print_section("4. GET /session/invalid-id - error handling")
     r = requests.get(f"{BASE_URL}/session/invalid123", timeout=10)
     data = r.json()
     print(f"  Status: {r.status_code}")
@@ -157,7 +157,7 @@ def test_invalid_session():
 
 
 def test_analyze_text_input():
-    print_section("5. POST /analyze — full text analysis")
+    print_section("5. POST /analyze - full text analysis")
     payload = {
         "resume_text": SAMPLE_RESUME,
         "jd_text": SAMPLE_JD,
@@ -211,7 +211,7 @@ def test_analyze_text_input():
         has_context = "context" in s
 
         level_color = {"Expert": "🟣", "Advanced": "🔵", "Intermediate": "🟢", "Beginner": "🟡"}.get(s.get("level", ""), "⚪")
-        print(f"     {level_color} {s.get('name', '?')} — {s.get('level', '?')} "
+        print(f"     {level_color} {s.get('name', '?')} - {s.get('level', '?')} "
               f"({s.get('years_experience', '?')}y) [{s.get('category', '?')}]")
 
         if not all([has_name, has_level, has_category, has_years, has_context]):
@@ -238,9 +238,9 @@ def test_analyze_text_input():
     optional = [s for s in jd_skills if s.get("level") == "Optional"]
     print(f"  📄 Required: {len(required)} | Optional: {len(optional)}")
     for s in required:
-        print(f"     🔴 {s['name']} — Required")
+        print(f"     🔴 {s['name']} - Required")
     for s in optional:
-        print(f"     🟠 {s['name']} — Optional")
+        print(f"     🟠 {s['name']} - Optional")
 
     # ── 5e. Skill Gap (enhanced) ─────────────────────────────────────────────
     print_subsection("5e. Skill Gap Analysis (enhanced)")
@@ -258,7 +258,7 @@ def test_analyze_text_input():
             related_str = f" (related: {', '.join(related)})" if related else ""
             print(f"     ⚠️  {g.get('skill', '?')} [{g.get('category', '?')}]{related_str}")
         else:
-            # Old format (string) — shouldn't happen with new code
+            # Old format (string) - shouldn't happen with new code
             print(f"     ⚠️  {g} (old format)")
 
     # ── 5f. Learning Path (graph-based) ──────────────────────────────────────
@@ -286,7 +286,7 @@ def test_analyze_text_input():
         prereq_str = f" (builds on: {', '.join(prereqs_met)})" if prereqs_met else ""
 
         print(f"\n     Step {step.get('step', '?')}: {step.get('skill', '?')}"
-              f" — {hours}h, {diff}{implicit_tag}{prereq_str}")
+              f" - {hours}h, {diff}{implicit_tag}{prereq_str}")
         print(f"       Reason: {step.get('reason', 'N/A')[:120]}...")
 
         if resources:
@@ -398,7 +398,7 @@ def test_get_session(session_id: str):
     assert_true("session has stats", "stats" in session)
     assert_true("session has created_at", "created_at" in session)
 
-    print(f"  📦 Session retrieved — role: {session.get('role_title', '?')}")
+    print(f"  📦 Session retrieved - role: {session.get('role_title', '?')}")
     print(f"  📦 Created: {session.get('created_at', '?')}")
     if "stats" in session:
         print(f"  📦 Match: {session['stats'].get('match_percentage', '?')}%")
@@ -419,7 +419,7 @@ def test_list_sessions():
         role = s.get("role_title", "N/A")
         created = s.get("created_at", "N/A")
         skills_count = len(s.get("resume_skills", []))
-        print(f"     • [{s.get('_id', '?')[:8]}...] {role} — {skills_count} skills — {created}")
+        print(f"     • [{s.get('_id', '?')[:8]}...] {role} - {skills_count} skills - {created}")
 
     # Verify heavy fields are excluded
     if sessions:
@@ -432,7 +432,7 @@ def test_list_sessions():
 
 def test_analyze_file_upload():
     """Test file upload with a sample TXT file."""
-    print_section("8. POST /analyze — file upload (TXT)")
+    print_section("8. POST /analyze - file upload (TXT)")
 
     # Create temporary test files
     resume_content = SAMPLE_RESUME.encode("utf-8")
@@ -454,7 +454,7 @@ def test_analyze_file_upload():
     assert_true("has learning_path", len(data.get("learning_path", [])) > 0)
     assert_true("has dependency_graph nodes", len(data.get("dependency_graph", {}).get("nodes", [])) > 0)
 
-    print(f"  ✅ File upload test passed — {len(data.get('resume_skills', []))} skills, "
+    print(f"  ✅ File upload test passed - {len(data.get('resume_skills', []))} skills, "
           f"{len(data.get('learning_path', []))} steps")
 
     return data.get("session_id")
@@ -466,7 +466,7 @@ def main():
     global passed, failed
 
     print("\n" + "═"*70)
-    print("  🚀 AI Adaptive Onboarding Engine — Comprehensive Test Suite")
+    print("  🚀 AI Adaptive Onboarding Engine - Comprehensive Test Suite")
     print(f"     Target: {BASE_URL}")
     print("═"*70)
 
@@ -505,7 +505,7 @@ def main():
     if failed == 0:
         print("  🎉 All tests passed!")
     else:
-        print(f"  ⚠️  {failed} test(s) failed — review output above")
+        print(f"  ⚠️  {failed} test(s) failed - review output above")
     print("═"*70 + "\n")
 
 

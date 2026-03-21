@@ -19,7 +19,7 @@ from services.firebase_admin_service import get_uid_from_request
 analyze_bp = Blueprint("analyze", __name__)
 
 
-# ── POST /parse (instant — no Gemini) ────────────────────────────────────────────
+# ── POST /parse (instant - no Gemini) ────────────────────────────────────────────
 
 @analyze_bp.route("/parse", methods=["POST"])
 def parse_files():
@@ -28,8 +28,8 @@ def parse_files():
     This is instant (<1 sec) and lets the frontend verify parsing works.
 
     Accepts multipart/form-data with:
-      - resume_file  (file upload — PDF, DOCX, TXT)
-      - jd_file      (file upload — PDF, DOCX, TXT)
+      - resume_file  (file upload - PDF, DOCX, TXT)
+      - jd_file      (file upload - PDF, DOCX, TXT)
       OR
       - resume_text   (str)
       - jd_text       (str)
@@ -89,8 +89,8 @@ def analyze():
     Analyze a resume against a job description.
 
     Accepts multipart/form-data OR application/x-www-form-urlencoded with:
-      - resume_text  (str)  OR  resume_file  (file upload — PDF, DOCX, TXT)
-      - jd_text      (str)  OR  jd_file      (file upload — PDF, DOCX, TXT)
+      - resume_text  (str)  OR  resume_file  (file upload - PDF, DOCX, TXT)
+      - jd_text      (str)  OR  jd_file      (file upload - PDF, DOCX, TXT)
 
     Returns JSON with skills, gaps, learning path, dependency graph, and explanation.
     """
@@ -119,7 +119,7 @@ def analyze():
     if user_uid:
         print(f"👤 User UID: {user_uid}")
     else:
-        print("⚠️  No user UID provided — session will be anonymous")
+        print("⚠️  No user UID provided - session will be anonymous")
 
     print(f"📝 Resume text length: {len(resume_text)} chars")
     print(f"📝 JD text length: {len(jd_text)} chars")
@@ -140,7 +140,7 @@ def analyze():
         role_title = jd_parsed.get("role_title", "Not specified")
         seniority_level = jd_parsed.get("seniority_level", "Not specified")
         domain = jd_parsed.get("domain", "Not specified")
-        print(f"✅ JD parsed — {len(jd_required)} required, {len(jd_optional)} optional skills")
+        print(f"✅ JD parsed - {len(jd_required)} required, {len(jd_optional)} optional skills")
     except Exception as e:
         traceback.print_exc()
         return _error(f"Job description parsing failed: {e}", 500)

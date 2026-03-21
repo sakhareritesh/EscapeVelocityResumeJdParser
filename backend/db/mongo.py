@@ -34,7 +34,7 @@ class MongoDB:
                 # Verify connection
                 cls._client.admin.command("ping")
                 cls._db = cls._client[db_name]
-                print(f"✅ Connected to MongoDB — database: '{db_name}'")
+                print(f"✅ Connected to MongoDB - database: '{db_name}'")
             except (ConnectionFailure, ServerSelectionTimeoutError) as e:
                 print(f"❌ MongoDB connection failed: {e}")
                 raise

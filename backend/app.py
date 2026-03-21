@@ -345,7 +345,7 @@ if __name__ == "__main__":
 
     print(f"""
 ╔══════════════════════════════════════════════════════╗
-║       AI Adaptive Onboarding Engine — Backend        ║
+║       AI Adaptive Onboarding Engine - Backend        ║
 ║                                                      ║
 ║  Upload UI:  http://localhost:{port}/upload            ║
 ║  POST  http://localhost:{port}/parse  (instant)        ║

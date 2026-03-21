@@ -13,7 +13,7 @@ load_dotenv()
 
 # ── Configuration ──────────────────────────────────────────────────────────────
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-# gemini-2.0-flash: 2,000 req/day free tier — best for demos
+# gemini-2.0-flash: 2,000 req/day free tier - best for demos
 MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
 MAX_RETRIES = 5
 RETRY_DELAY = 2
@@ -82,7 +82,7 @@ def _repair_json(text: str) -> str:
 
     text = "\n".join(fixed_lines)
 
-    # 3. Handle truncated JSON — count brackets and add missing closing ones
+    # 3. Handle truncated JSON - count brackets and add missing closing ones
     open_braces = text.count("{") - text.count("}")
     open_brackets = text.count("[") - text.count("]")
 
@@ -254,14 +254,14 @@ def generate_response(prompt: str, expect_json: bool = True) -> dict | list | st
 
         except ValueError as e:
             last_error = e
-            print(f"⚠️  Gemini attempt {attempt}/{MAX_RETRIES} — parse error: {e}")
+            print(f"⚠️  Gemini attempt {attempt}/{MAX_RETRIES} - parse error: {e}")
             if attempt < MAX_RETRIES:
                 time.sleep(RETRY_DELAY)
 
         except Exception as e:
             last_error = e
             error_str = str(e)
-            print(f"⚠️  Gemini attempt {attempt}/{MAX_RETRIES} — API error: {e}")
+            print(f"⚠️  Gemini attempt {attempt}/{MAX_RETRIES} - API error: {e}")
 
             if attempt < MAX_RETRIES:
                 # Respect rate limit retry-delay from API
@@ -269,7 +269,7 @@ def generate_response(prompt: str, expect_json: bool = True) -> dict | list | st
                     # Extract retry delay from error if available
                     retry_match = re.search(r'retry in ([\d.]+)', error_str)
                     wait_time = float(retry_match.group(1)) + 2 if retry_match else 30
-                    print(f"   ⏳ Rate limited — waiting {wait_time:.0f}s before retry...")
+                    print(f"   ⏳ Rate limited - waiting {wait_time:.0f}s before retry...")
                     time.sleep(wait_time)
                 else:
                     time.sleep(RETRY_DELAY * attempt)

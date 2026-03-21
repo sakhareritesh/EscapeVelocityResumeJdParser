@@ -2,9 +2,9 @@
 utils/file_handler.py - Extract plain text from uploaded files (PDF, DOCX, TXT)
 
 Uses a multi-strategy approach for PDFs:
-  1. pdfplumber  — best for structured / multi-column resumes
-  2. PyPDF2      — fallback for simpler PDFs
-  3. Gemini multimodal — fallback for scanned / image-heavy PDFs
+  1. pdfplumber  - best for structured / multi-column resumes
+  2. PyPDF2      - fallback for simpler PDFs
+  3. Gemini multimodal - fallback for scanned / image-heavy PDFs
 """
 
 import io
@@ -35,7 +35,7 @@ def _allowed_file(filename: str) -> bool:
 # ── PDF Extraction Strategies ───────────────────────────────────────────────────
 
 def _extract_pdf_pdfplumber(file_bytes: bytes) -> str:
-    """Strategy 1: pdfplumber — excellent for complex layouts & tables."""
+    """Strategy 1: pdfplumber - excellent for complex layouts & tables."""
     try:
         with pdfplumber.open(io.BytesIO(file_bytes)) as pdf:
             text_parts = []
@@ -50,7 +50,7 @@ def _extract_pdf_pdfplumber(file_bytes: bytes) -> str:
 
 
 def _extract_pdf_pypdf2(file_bytes: bytes) -> str:
-    """Strategy 2: PyPDF2 — simpler extraction, good fallback."""
+    """Strategy 2: PyPDF2 - simpler extraction, good fallback."""
     try:
         reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
         text_parts = []
@@ -66,7 +66,7 @@ def _extract_pdf_pypdf2(file_bytes: bytes) -> str:
 
 def _extract_pdf_gemini(file_bytes: bytes) -> str:
     """
-    Strategy 3: Gemini multimodal — send PDF as inline data.
+    Strategy 3: Gemini multimodal - send PDF as inline data.
     Handles scanned PDFs and image-heavy documents via OCR-like extraction.
     """
     try:
@@ -81,7 +81,7 @@ def _extract_pdf_gemini(file_bytes: bytes) -> str:
         b64_pdf = base64.b64encode(file_bytes).decode("utf-8")
 
         prompt = """You are a document text extractor. Extract ALL the text content from 
-this PDF document. Preserve the structure as much as possible — sections, bullet points, 
+this PDF document. Preserve the structure as much as possible - sections, bullet points, 
 dates, job titles, skills, education, etc. Return ONLY the extracted plain text, 
 nothing else. Do not add any commentary or formatting markers."""
 
@@ -133,7 +133,7 @@ def _extract_from_pdf(file_bytes: bytes) -> str:
         return text_pypdf2
 
     # Strategy 3: Gemini multimodal (for scanned/image PDFs)
-    print("  🔄 Text extractors yielded little text — trying Gemini multimodal...")
+    print("  🔄 Text extractors yielded little text - trying Gemini multimodal...")
     text_gemini = _clean_extracted_text(_extract_pdf_gemini(file_bytes))
     if len(text_gemini) >= MIN_USEFUL_TEXT_LENGTH:
         print(f"  ✅ Gemini multimodal extracted {len(text_gemini)} chars")
@@ -142,14 +142,14 @@ def _extract_from_pdf(file_bytes: bytes) -> str:
     # Return whatever we have (even if short)
     best = max([text_plumber, text_pypdf2, text_gemini], key=len)
     if best:
-        print(f"  ⚠️  Best extraction only {len(best)} chars — quality may be low")
+        print(f"  ⚠️  Best extraction only {len(best)} chars - quality may be low")
         return best
 
     return ""
 
 
 def _extract_from_docx(file_bytes: bytes) -> str:
-    """Extract text from DOCX bytes — includes tables and headers."""
+    """Extract text from DOCX bytes - includes tables and headers."""
     doc = docx.Document(io.BytesIO(file_bytes))
 
     parts = []
@@ -204,7 +204,7 @@ def extract_text_from_file(file: FileStorage) -> str:
     size_mb = len(file_bytes) / (1024 * 1024)
     if size_mb > MAX_FILE_SIZE_MB:
         raise ValueError(
-            f"File '{filename}' is {size_mb:.1f} MB — "
+            f"File '{filename}' is {size_mb:.1f} MB - "
             f"max allowed is {MAX_FILE_SIZE_MB} MB."
         )
 

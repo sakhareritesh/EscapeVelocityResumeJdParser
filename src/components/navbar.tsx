@@ -52,11 +52,17 @@ export function Navbar() {
           <Link href="/#features" className="text-muted-foreground transition-colors hover:text-foreground">
             Features
           </Link>
+          <Link href="/#how-it-works" className="text-muted-foreground transition-colors hover:text-foreground">
+            How it Works
+          </Link>
+          <Link href="/#technology" className="text-muted-foreground transition-colors hover:text-foreground">
+            Technology
+          </Link>
           <Link href="/#templates" className="text-muted-foreground transition-colors hover:text-foreground">
             Templates
           </Link>
-          <Link href="/#how-it-works" className="text-muted-foreground transition-colors hover:text-foreground">
-            How it Works
+          <Link href="/#pricing" className="text-muted-foreground transition-colors hover:text-foreground">
+            Pricing
           </Link>
         </nav>
         <div className="flex items-center gap-2">
