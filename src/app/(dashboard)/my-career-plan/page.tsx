@@ -61,7 +61,7 @@ export default function MyCareerPlanPage() {
                     </div>
                     <h3 className="text-lg font-bold text-gray-900 mb-2">No Career Plan Yet</h3>
                     <p className="text-sm text-gray-500 text-center max-w-md mb-6">
-                        Upload your resume and a job description to generate your personalized career plan with AI-powered skill analysis and learning roadmap.
+                        Upload your resume and a job description to generate your personalized career plan with SkillMapr-powered skill analysis and learning roadmap.
                     </p>
                     <Link href="/upload-resume">
                         <Button className="bg-gradient-to-r from-violet-600 to-blue-600 hover:from-violet-700 hover:to-blue-700 text-white gap-2">

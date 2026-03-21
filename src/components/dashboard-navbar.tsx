@@ -26,7 +26,7 @@ export function DashboardNavbar() {
           </div>
           <div>
             <span className="font-bold text-lg">SkillMapr Pro</span>
-            <p className="text-xs text-muted-foreground -mt-1">AI-Powered Dashboard</p>
+            <p className="text-xs text-muted-foreground -mt-1">SkillMapr-Powered Dashboard</p>
           </div>
         </Link>
         <div className="flex items-center gap-2">

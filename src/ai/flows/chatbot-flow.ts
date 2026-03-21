@@ -42,7 +42,7 @@ const prompt = ai.definePrompt({
   4.  **Being Multilingual:** You must respond in the specified language. If no language is specified, you must detect the user's language from the conversation and respond in the same language.
 
   **Website Information (SkillMapr):**
-  - **What it is:** An AI-powered platform to create professional portfolio websites.
+  - **What it is:** An SkillMapr-powered platform to create professional portfolio websites.
   - **How it works:**
     1.  Users import data from their resume, GitHub, or LinkedIn.
     2.  The AI extracts and organizes the information.

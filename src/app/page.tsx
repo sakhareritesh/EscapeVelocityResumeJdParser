@@ -110,7 +110,7 @@ const heroFeatureCards = [
     icon: <Palette className="w-7 h-7 text-violet-500" />,
     title: "Portfolio Builder",
     description:
-      "AI-powered portfolio generation with 15+ professional templates",
+      "SkillMapr-powered portfolio generation with 15+ professional templates",
     bgColor: "bg-violet-500/10",
     borderColor: "border-violet-500/20",
   },
@@ -122,7 +122,7 @@ const howItWorksSteps = [
     icon: <Upload className="w-10 h-10 text-primary" />,
     title: "Upload Documents",
     description:
-      "Upload your Resume and the target Job Description. Our AI-powered NLP engine intelligently parses and structures your professional data.",
+      "Upload your Resume and the target Job Description. Our SkillMapr-powered NLP engine intelligently parses and structures your professional data.",
     gradient: "from-blue-500/20 to-purple-500/20",
   },
   {
@@ -764,7 +764,7 @@ function SplashPage() {
               Roadmap, <span className="animated-gradient">Your Career</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              Upload your resume and job description - our AI-powered engine
+              Upload your resume and job description - our SkillMapr-powered engine
               identifies skill gaps and generates a personalized learning
               pathway to accelerate your career. Plus, build a stunning
               portfolio in minutes.
@@ -885,7 +885,7 @@ function SplashPage() {
               variant="outline"
               className="mx-auto mb-4 text-sm font-semibold border-primary/30 bg-primary/10 text-primary py-1 px-3 rounded-full w-fit"
             >
-              <BrainCircuit className="w-4 h-4 mr-2" /> AI-Powered Features
+              <BrainCircuit className="w-4 h-4 mr-2" /> SkillMapr-Powered Features
             </Badge>
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
               Powerful AI Features
@@ -1247,7 +1247,7 @@ function SplashPage() {
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-green-400" />
-                <span>AI-Powered Insights</span>
+                <span>SkillMapr-Powered Insights</span>
               </div>
             </div>
           </div>
@@ -1275,7 +1275,7 @@ function SplashPage() {
                 </div>
               </Link>
               <p className="max-w-md text-sm">
-                AI-powered adaptive learning platform that parses your resume
+                SkillMapr-powered adaptive learning platform that parses your resume
                 and job descriptions, identifies skill gaps, generates
                 personalized training roadmaps, and builds stunning portfolio
                 websites - all in minutes.

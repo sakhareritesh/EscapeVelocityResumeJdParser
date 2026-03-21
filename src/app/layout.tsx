@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'SkillMapr',
-  description: 'Generate beautiful portfolio websites with AI',
+  description: 'AI-Adaptive Learning Platform — Parse resumes, identify skill gaps, generate personalized learning pathways, and build stunning portfolios.',
 };
 
 export default function RootLayout({
