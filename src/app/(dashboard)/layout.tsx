@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/auth-context';
+import { AnalysisProvider } from '@/context/analysis-context';
 import { LearningSidebar } from '@/components/learning/LearningSidebar';
 import { LearningNavbar } from '@/components/learning/LearningNavbar';
 import { Loader2 } from 'lucide-react';
@@ -29,16 +30,18 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
     if (!user) return null;
 
     return (
-        <div className="flex h-screen bg-[#f8f7f4] dark:bg-background overflow-hidden">
-            <LearningSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-            <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-                <LearningNavbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
-                <main className="flex-1 overflow-y-auto">
-                    <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6">
-                        {children}
-                    </div>
-                </main>
+        <AnalysisProvider>
+            <div className="flex h-screen bg-[#f8f7f4] dark:bg-background overflow-hidden">
+                <LearningSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+                <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+                    <LearningNavbar onMenuToggle={() => setSidebarOpen(!sidebarOpen)} />
+                    <main className="flex-1 overflow-y-auto">
+                        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-6">
+                            {children}
+                        </div>
+                    </main>
+                </div>
             </div>
-        </div>
+        </AnalysisProvider>
     );
 }

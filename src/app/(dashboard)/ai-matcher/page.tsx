@@ -55,7 +55,7 @@ export default function RecruitmentMatcherPage() {
             reader.readAsDataURL(file);
         }
     };
-    
+
     const filteredAndSortedJobs = useMemo(() => {
         if (!selectedCategory) return [];
         return parsedJobListings.filter(job => job.category.toLowerCase() === selectedCategory);
@@ -96,7 +96,7 @@ export default function RecruitmentMatcherPage() {
         }
 
         const jobListingsText = filteredJobEntries.join('---\n');
-        
+
         const result = await recruitmentMatcherAction(user.uid, {
             resumeDataUri,
             jobListingsText,
@@ -132,7 +132,7 @@ export default function RecruitmentMatcherPage() {
             return a.companyName.localeCompare(b.companyName);
         });
     }, [analysisReport]);
-    
+
     if (authLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-muted/40">
@@ -144,204 +144,204 @@ export default function RecruitmentMatcherPage() {
     return (
         <div>
             <div className="text-center my-8">
-                    <h1 className="text-4xl font-bold tracking-tight flex items-center justify-center gap-4"><Sparkles className="w-10 h-10 text-primary" /> AI Job Matcher</h1>
-                    <p className="text-muted-foreground mt-2">Upload your resume, select a category, and instantly see your eligibility and a personalized learning path.</p>
-                </div>
-                
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-8">
-                    <Card className="lg:col-span-1 shadow-lg">
-                        <CardHeader>
-                            <CardTitle>Your Information</CardTitle>
-                            <CardDescription>Provide your details to start.</CardDescription>
-                        </CardHeader>
-                         <CardContent className="space-y-6">
-                            <div>
-                                <Label className="font-semibold">1. Upload Your Resume</Label>
-                                <Label htmlFor="resume-upload" className="mt-2 flex flex-col items-center justify-center w-full px-6 py-10 border-2 border-dashed rounded-lg cursor-pointer border-gray-300 dark:border-gray-600 hover:border-primary dark:hover:border-primary transition-colors">
-                                    <UploadCloud className="w-8 h-8 mx-auto mb-2 text-gray-400" />
-                                    {resumeFileName ? (
-                                        <p className="font-medium text-primary text-sm">{resumeFileName}</p>
-                                    ) : (
-                                        <>
-                                            <p className="text-gray-600 dark:text-gray-300 font-semibold text-sm">Drop your resume here</p>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400">Or click to choose a file (PDF, DOCX)</p>
-                                        </>
-                                    )}
-                                </Label>
-                                <Input id="resume-upload" type="file" className="hidden" onChange={handleFileChange} accept=".pdf,.docx,.doc,.txt" />
-                            </div>
-                            <div>
-                                <Label className="font-semibold">2. Select Job Category</Label>
-                                <div className="grid grid-cols-2 gap-4 mt-2">
-                                    <Button variant={selectedCategory === 'software' ? 'default' : 'outline'} onClick={() => setSelectedCategory('software')} className="h-20 flex-col gap-2">
-                                        <Code className="w-8 h-8" />
-                                        Software
-                                    </Button>
-                                    <Button variant={selectedCategory === 'hardware' ? 'default' : 'outline'} onClick={() => setSelectedCategory('hardware')} className="h-20 flex-col gap-2">
-                                        <Cpu className="w-8 h-8" />
-                                        Hardware
-                                    </Button>
-                                </div>
-                            </div>
-                        </CardContent>
-                    </Card>
+                <h1 className="text-4xl font-bold tracking-tight flex items-center justify-center gap-4"><Sparkles className="w-10 h-10 text-primary" /> SkillMapr Job Matcher</h1>
+                <p className="text-muted-foreground mt-2">Upload your resume, select a category, and instantly see your eligibility and a personalized learning path.</p>
+            </div>
 
-                    <div className="lg:col-span-2">
-                        <Card className="shadow-lg">
-                             <CardHeader>
-                                <CardTitle>Job Listings Marketplace: <span className="capitalize text-primary">{selectedCategory}</span></CardTitle>
-                                <CardDescription>Click the button below to match your resume against these opportunities.</CardDescription>
-                            </CardHeader>
-                            <CardContent>
-                                <ScrollArea className="h-[400px] p-1">
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                                        {filteredAndSortedJobs.map((job, index) => (
-                                            <Dialog key={index}>
-                                                <DialogTrigger asChild>
-                                                    <Card className={cn("flex flex-col items-center justify-center p-4 text-center cursor-pointer hover:shadow-lg hover:border-primary transition-all relative group", job.status === 'Closed' && 'grayscale opacity-60')}>
-                                                        <div className="w-16 h-16 relative mb-2">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-8">
+                <Card className="lg:col-span-1 shadow-lg">
+                    <CardHeader>
+                        <CardTitle>Your Information</CardTitle>
+                        <CardDescription>Provide your details to start.</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                        <div>
+                            <Label className="font-semibold">1. Upload Your Resume</Label>
+                            <Label htmlFor="resume-upload" className="mt-2 flex flex-col items-center justify-center w-full px-6 py-10 border-2 border-dashed rounded-lg cursor-pointer border-gray-300 dark:border-gray-600 hover:border-primary dark:hover:border-primary transition-colors">
+                                <UploadCloud className="w-8 h-8 mx-auto mb-2 text-gray-400" />
+                                {resumeFileName ? (
+                                    <p className="font-medium text-primary text-sm">{resumeFileName}</p>
+                                ) : (
+                                    <>
+                                        <p className="text-gray-600 dark:text-gray-300 font-semibold text-sm">Drop your resume here</p>
+                                        <p className="text-xs text-gray-500 dark:text-gray-400">Or click to choose a file (PDF, DOCX)</p>
+                                    </>
+                                )}
+                            </Label>
+                            <Input id="resume-upload" type="file" className="hidden" onChange={handleFileChange} accept=".pdf,.docx,.doc,.txt" />
+                        </div>
+                        <div>
+                            <Label className="font-semibold">2. Select Job Category</Label>
+                            <div className="grid grid-cols-2 gap-4 mt-2">
+                                <Button variant={selectedCategory === 'software' ? 'default' : 'outline'} onClick={() => setSelectedCategory('software')} className="h-20 flex-col gap-2">
+                                    <Code className="w-8 h-8" />
+                                    Software
+                                </Button>
+                                <Button variant={selectedCategory === 'hardware' ? 'default' : 'outline'} onClick={() => setSelectedCategory('hardware')} className="h-20 flex-col gap-2">
+                                    <Cpu className="w-8 h-8" />
+                                    Hardware
+                                </Button>
+                            </div>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <div className="lg:col-span-2">
+                    <Card className="shadow-lg">
+                        <CardHeader>
+                            <CardTitle>Job Listings Marketplace: <span className="capitalize text-primary">{selectedCategory}</span></CardTitle>
+                            <CardDescription>Click the button below to match your resume against these opportunities.</CardDescription>
+                        </CardHeader>
+                        <CardContent>
+                            <ScrollArea className="h-[400px] p-1">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                    {filteredAndSortedJobs.map((job, index) => (
+                                        <Dialog key={index}>
+                                            <DialogTrigger asChild>
+                                                <Card className={cn("flex flex-col items-center justify-center p-4 text-center cursor-pointer hover:shadow-lg hover:border-primary transition-all relative group", job.status === 'Closed' && 'grayscale opacity-60')}>
+                                                    <div className="w-16 h-16 relative mb-2">
+                                                        <Image src={job.logoUrl} alt={`${job.companyName} logo`} fill className="object-contain" />
+                                                    </div>
+                                                    <p className="font-semibold text-sm">{job.companyName}</p>
+                                                    <p className="text-xs text-muted-foreground">{job.role}</p>
+                                                    <Badge variant={job.type === 'Internship' ? 'secondary' : 'default'} className="mt-1 text-xs">{job.type}</Badge>
+                                                    {eligibilityResults[job.companyName] && (
+                                                        <div className={cn("absolute top-1 right-1 w-5 h-5 rounded-full flex items-center justify-center",
+                                                            eligibilityResults[job.companyName] === 'Eligible' ? 'bg-green-500' : 'bg-red-500')}>
+                                                            {eligibilityResults[job.companyName] === 'Eligible' ? <CheckCircle className="w-3 h-3 text-white" /> : <XCircle className="w-3 h-3 text-white" />}
+                                                        </div>
+                                                    )}
+                                                </Card>
+                                            </DialogTrigger>
+                                            <DialogContent className="sm:max-w-[600px]">
+                                                <DialogHeader>
+                                                    <DialogTitle className="text-2xl flex items-center gap-4">
+                                                        <div className="w-16 h-16 relative">
                                                             <Image src={job.logoUrl} alt={`${job.companyName} logo`} fill className="object-contain" />
                                                         </div>
-                                                        <p className="font-semibold text-sm">{job.companyName}</p>
-                                                        <p className="text-xs text-muted-foreground">{job.role}</p>
-                                                        <Badge variant={job.type === 'Internship' ? 'secondary' : 'default'} className="mt-1 text-xs">{job.type}</Badge>
-                                                        {eligibilityResults[job.companyName] && (
-                                                            <div className={cn("absolute top-1 right-1 w-5 h-5 rounded-full flex items-center justify-center", 
-                                                                eligibilityResults[job.companyName] === 'Eligible' ? 'bg-green-500' : 'bg-red-500')}>
-                                                                {eligibilityResults[job.companyName] === 'Eligible' ? <CheckCircle className="w-3 h-3 text-white" /> : <XCircle className="w-3 h-3 text-white"/>}
-                                                            </div>
-                                                        )}
-                                                    </Card>
-                                                </DialogTrigger>
-                                                <DialogContent className="sm:max-w-[600px]">
-                                                     <DialogHeader>
-                                                        <DialogTitle className="text-2xl flex items-center gap-4">
-                                                            <div className="w-16 h-16 relative">
-                                                              <Image src={job.logoUrl} alt={`${job.companyName} logo`} fill className="object-contain"/>
-                                                            </div>
-                                                            <div>
-                                                                {job.companyName}
-                                                                <p className="text-lg font-normal">{job.role}</p>
-                                                            </div>
-                                                        </DialogTitle>
-                                                        {job.status === 'Closed' && (
-                                                            <div className="!mt-4 p-3 bg-destructive/10 border border-destructive/20 text-destructive font-semibold rounded-lg text-center">
-                                                                This hiring drive has ended.
-                                                            </div>
-                                                        )}
-                                                        <DialogDescription className="pt-4 text-left">
-                                                           {job.description}
-                                                        </DialogDescription>
-                                                    </DialogHeader>
-                                                    <div className="grid gap-4 py-4">
-                                                         <div className="space-y-2">
-                                                            <h4 className="font-semibold">Package (LPA)</h4>
-                                                            <p className="text-sm text-muted-foreground">{job.packageLPA} LPA</p>
+                                                        <div>
+                                                            {job.companyName}
+                                                            <p className="text-lg font-normal">{job.role}</p>
                                                         </div>
-                                                        <div className="space-y-2">
-                                                            <h4 className="font-semibold">Eligibility</h4>
-                                                            <p className="text-sm text-muted-foreground">{job.eligibility}</p>
+                                                    </DialogTitle>
+                                                    {job.status === 'Closed' && (
+                                                        <div className="!mt-4 p-3 bg-destructive/10 border border-destructive/20 text-destructive font-semibold rounded-lg text-center">
+                                                            This hiring drive has ended.
                                                         </div>
-                                                        <div className="space-y-2">
-                                                            <h4 className="font-semibold">Minimum CGPA</h4>
-                                                             <p className="text-sm text-muted-foreground">{job.cgpa}</p>
-                                                        </div>
-                                                        <div className="space-y-2">
-                                                            <h4 className="font-semibold">Required Skills</h4>
-                                                            <div className="flex flex-wrap gap-2">
-                                                                {job.skills.split(',').map(skill => (
-                                                                    <Badge key={skill} variant="secondary">{skill.trim()}</Badge>
-                                                                ))}
-                                                            </div>
+                                                    )}
+                                                    <DialogDescription className="pt-4 text-left">
+                                                        {job.description}
+                                                    </DialogDescription>
+                                                </DialogHeader>
+                                                <div className="grid gap-4 py-4">
+                                                    <div className="space-y-2">
+                                                        <h4 className="font-semibold">Package (LPA)</h4>
+                                                        <p className="text-sm text-muted-foreground">{job.packageLPA} LPA</p>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <h4 className="font-semibold">Eligibility</h4>
+                                                        <p className="text-sm text-muted-foreground">{job.eligibility}</p>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <h4 className="font-semibold">Minimum CGPA</h4>
+                                                        <p className="text-sm text-muted-foreground">{job.cgpa}</p>
+                                                    </div>
+                                                    <div className="space-y-2">
+                                                        <h4 className="font-semibold">Required Skills</h4>
+                                                        <div className="flex flex-wrap gap-2">
+                                                            {job.skills.split(',').map(skill => (
+                                                                <Badge key={skill} variant="secondary">{skill.trim()}</Badge>
+                                                            ))}
                                                         </div>
                                                     </div>
-                                                    <Button asChild className="w-full" disabled={job.status === 'Closed'}>
-                                                        <a href={job.applyLink} target="_blank" rel="noopener noreferrer">
-                                                            Apply Now <ExternalLink className="ml-2 h-4 w-4" />
-                                                        </a>
-                                                    </Button>
-                                                </DialogContent>
-                                            </Dialog>
-                                        ))}
-                                    </div>
-                                </ScrollArea>
-                            </CardContent>
-                        </Card>
-                    </div>
+                                                </div>
+                                                <Button asChild className="w-full" disabled={job.status === 'Closed'}>
+                                                    <a href={job.applyLink} target="_blank" rel="noopener noreferrer">
+                                                        Apply Now <ExternalLink className="ml-2 h-4 w-4" />
+                                                    </a>
+                                                </Button>
+                                            </DialogContent>
+                                        </Dialog>
+                                    ))}
+                                </div>
+                            </ScrollArea>
+                        </CardContent>
+                    </Card>
                 </div>
+            </div>
 
-                <div className="flex justify-center mb-8">
-                    <Button size="lg" onClick={handleSubmit} disabled={isLoading || !resumeDataUri} className="w-full max-w-md">
-                        {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
-                        Analyze My Eligibility
-                    </Button>
-                </div>
-                
-                <div ref={resultsRef} className="mt-12">
-                    {analysisReport && (
-                        <>
-                            <h2 className="text-3xl font-bold text-center mb-8">Your Personalized Matching Report</h2>
-                            <div className="space-y-6">
-                                {sortedEvaluations.map((evaluation, index) => (
-                                    <Card key={index} className={cn(
-                                        "shadow-md",
-                                        evaluation.eligibility === 'Eligible' ? 'border-green-500 bg-green-50/50 dark:bg-green-900/10' : 'border-red-500 bg-red-50/50 dark:bg-red-900/10'
-                                    )}>
-                                        <CardHeader>
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <CardTitle>{evaluation.companyName} - <span className="font-normal">{evaluation.role}</span></CardTitle>
-                                                    <CardDescription className="mt-1">Eligibility Analysis</CardDescription>
-                                                </div>
-                                                <Badge variant={evaluation.eligibility === 'Eligible' ? 'default' : 'destructive'} className={cn(evaluation.eligibility === 'Eligible' && "bg-green-600")}>
-                                                    {evaluation.eligibility === 'Eligible' ? <CheckCircle className="mr-2 h-4 w-4" /> : <XCircle className="mr-2 h-4 w-4" />}
-                                                    {evaluation.eligibility}
-                                                </Badge>
-                                            </div>
-                                        </CardHeader>
-                                        <CardContent className="space-y-6">
+            <div className="flex justify-center mb-8">
+                <Button size="lg" onClick={handleSubmit} disabled={isLoading || !resumeDataUri} className="w-full max-w-md">
+                    {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}
+                    Analyze My Eligibility
+                </Button>
+            </div>
+
+            <div ref={resultsRef} className="mt-12">
+                {analysisReport && (
+                    <>
+                        <h2 className="text-3xl font-bold text-center mb-8">Your Personalized Matching Report</h2>
+                        <div className="space-y-6">
+                            {sortedEvaluations.map((evaluation, index) => (
+                                <Card key={index} className={cn(
+                                    "shadow-md",
+                                    evaluation.eligibility === 'Eligible' ? 'border-green-500 bg-green-50/50 dark:bg-green-900/10' : 'border-red-500 bg-red-50/50 dark:bg-red-900/10'
+                                )}>
+                                    <CardHeader>
+                                        <div className="flex justify-between items-start">
                                             <div>
-                                                <h4 className="font-semibold text-sm">Reason:</h4>
-                                                <p className="text-muted-foreground text-sm">{evaluation.reason}</p>
+                                                <CardTitle>{evaluation.companyName} - <span className="font-normal">{evaluation.role}</span></CardTitle>
+                                                <CardDescription className="mt-1">Eligibility Analysis</CardDescription>
                                             </div>
-                                            
-                                            <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg dark:bg-amber-900/20 dark:border-amber-500/30">
-                                                <h4 className="font-semibold text-sm flex items-center gap-2 text-amber-800 dark:text-amber-300"><Lightbulb className="w-4 h-4" />Your Personalized Learning Path</h4>
-                                                <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
-                                                    <div>
-                                                        <h5 className="font-semibold flex items-center gap-2 mb-2"><BookOpen className="w-4 h-4"/>Courses to Take</h5>
-                                                        <ul className="list-disc pl-5 space-y-1 text-amber-700 dark:text-amber-400">
-                                                            {evaluation.learningPath.courses.map((course, i) => <li key={i}>{course}</li>)}
-                                                        </ul>
-                                                    </div>
-                                                    <div>
-                                                        <h5 className="font-semibold flex items-center gap-2 mb-2"><Target className="w-4 h-4"/>Projects to Build</h5>
-                                                        <ul className="list-disc pl-5 space-y-1 text-amber-700 dark:text-amber-400">
-                                                             {evaluation.learningPath.projects.map((project, i) => <li key={i}>{project}</li>)}
-                                                        </ul>
-                                                    </div>
-                                                    <div>
-                                                        <h5 className="font-semibold flex items-center gap-2 mb-2"><Award className="w-4 h-4"/>Certifications to Earn</h5>
-                                                         <ul className="list-disc pl-5 space-y-1 text-amber-700 dark:text-amber-400">
-                                                            {evaluation.learningPath.certifications.map((cert, i) => <li key={i}>{cert}</li>)}
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            
-                                            {evaluation.suggestions && (
+                                            <Badge variant={evaluation.eligibility === 'Eligible' ? 'default' : 'destructive'} className={cn(evaluation.eligibility === 'Eligible' && "bg-green-600")}>
+                                                {evaluation.eligibility === 'Eligible' ? <CheckCircle className="mr-2 h-4 w-4" /> : <XCircle className="mr-2 h-4 w-4" />}
+                                                {evaluation.eligibility}
+                                            </Badge>
+                                        </div>
+                                    </CardHeader>
+                                    <CardContent className="space-y-6">
+                                        <div>
+                                            <h4 className="font-semibold text-sm">Reason:</h4>
+                                            <p className="text-muted-foreground text-sm">{evaluation.reason}</p>
+                                        </div>
+
+                                        <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg dark:bg-amber-900/20 dark:border-amber-500/30">
+                                            <h4 className="font-semibold text-sm flex items-center gap-2 text-amber-800 dark:text-amber-300"><Lightbulb className="w-4 h-4" />Your Personalized Learning Path</h4>
+                                            <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
                                                 <div>
-                                                    <h4 className="font-semibold text-sm">Alternative Roles:</h4>
-                                                    <p className="text-muted-foreground text-sm">{evaluation.suggestions}</p>
+                                                    <h5 className="font-semibold flex items-center gap-2 mb-2"><BookOpen className="w-4 h-4" />Courses to Take</h5>
+                                                    <ul className="list-disc pl-5 space-y-1 text-amber-700 dark:text-amber-400">
+                                                        {evaluation.learningPath.courses.map((course, i) => <li key={i}>{course}</li>)}
+                                                    </ul>
                                                 </div>
-                                            )}
-                                        </CardContent>
-                                    </Card>
-                                ))}
-                            </div>
-                        </>
-                    )}
-                </div>
+                                                <div>
+                                                    <h5 className="font-semibold flex items-center gap-2 mb-2"><Target className="w-4 h-4" />Projects to Build</h5>
+                                                    <ul className="list-disc pl-5 space-y-1 text-amber-700 dark:text-amber-400">
+                                                        {evaluation.learningPath.projects.map((project, i) => <li key={i}>{project}</li>)}
+                                                    </ul>
+                                                </div>
+                                                <div>
+                                                    <h5 className="font-semibold flex items-center gap-2 mb-2"><Award className="w-4 h-4" />Certifications to Earn</h5>
+                                                    <ul className="list-disc pl-5 space-y-1 text-amber-700 dark:text-amber-400">
+                                                        {evaluation.learningPath.certifications.map((cert, i) => <li key={i}>{cert}</li>)}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {evaluation.suggestions && (
+                                            <div>
+                                                <h4 className="font-semibold text-sm">Alternative Roles:</h4>
+                                                <p className="text-muted-foreground text-sm">{evaluation.suggestions}</p>
+                                            </div>
+                                        )}
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
+                    </>
+                )}
+            </div>
         </div>
     );
 }

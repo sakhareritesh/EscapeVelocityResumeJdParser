@@ -7,7 +7,9 @@ from flask import Flask, jsonify, render_template_string, request
 from flask_cors import CORS
 from dotenv import load_dotenv
 
+# Load .env from backend dir first, then fallback to parent project root
 load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
 # ── App Factory ─────────────────────────────────────────────────────────────────
 
@@ -34,9 +36,19 @@ def create_app() -> Flask:
         print(f"⚠️  MongoDB not available at startup: {e}")
         print("   The API will start but /analyze will fail until DB is reachable.")
 
+    # ── Firebase Admin SDK ────────────────────────────────────────────────────────
+    try:
+        from services.firebase_admin_service import init_firebase
+        init_firebase()
+    except Exception as e:
+        print(f"⚠️  Firebase Admin SDK not available: {e}")
+
     # ── Register Blueprints ───────────────────────────────────────────────────────
     from routes.analyze import analyze_bp
     app.register_blueprint(analyze_bp)
+
+    from routes.user import user_bp
+    app.register_blueprint(user_bp)
 
     # ── Health Check ─────────────────────────────────────────────────────────────
     @app.route("/health", methods=["GET"])
@@ -67,6 +79,9 @@ def create_app() -> Flask:
                 "GET  /upload":           "Upload UI for testing",
                 "GET  /session/<id>":     "Retrieve a stored session",
                 "GET  /sessions":         "List recent sessions (last 20)",
+                "GET  /user/sessions":    "Get all sessions for a user (by firebase_uid)",
+                "GET  /user/latest-session": "Get latest session for a user",
+                "GET  /user/session/<id>": "Get a specific user session",
                 "GET  /health":           "Health check",
             },
         }), 200

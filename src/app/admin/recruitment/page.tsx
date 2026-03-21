@@ -35,7 +35,7 @@ export default function RecruitmentMatcherPage() {
     const { toast } = useToast();
     const resultsRef = useRef<HTMLDivElement>(null);
 
-     useEffect(() => {
+    useEffect(() => {
         if (!authLoading && !user) {
             router.push('/login');
         }
@@ -63,7 +63,7 @@ export default function RecruitmentMatcherPage() {
             reader.readAsDataURL(file);
         }
     };
-    
+
     const filteredAndSortedJobs = useMemo(() => {
         if (!selectedCategory) return [];
         return parsedJobListings.filter(job => job.category.toLowerCase() === selectedCategory);
@@ -104,7 +104,7 @@ export default function RecruitmentMatcherPage() {
         }
 
         const jobListingsText = filteredJobEntries.join('---\n');
-        
+
         const result = await recruitmentMatcherAction(user.uid, {
             resumeDataUri,
             jobListingsText,
@@ -140,7 +140,7 @@ export default function RecruitmentMatcherPage() {
             return a.companyName.localeCompare(b.companyName);
         });
     }, [analysisReport]);
-    
+
     if (authLoading) {
         return (
             <div className="flex items-center justify-center min-h-screen bg-muted/40">
@@ -154,17 +154,17 @@ export default function RecruitmentMatcherPage() {
             <DashboardNavbar />
             <main className="container mx-auto px-4 py-8">
                 <div className="text-center my-8">
-                    <h1 className="text-4xl font-bold tracking-tight flex items-center justify-center gap-4"><Sparkles className="w-10 h-10 text-primary" /> AI Job Matcher</h1>
+                    <h1 className="text-4xl font-bold tracking-tight flex items-center justify-center gap-4"><Sparkles className="w-10 h-10 text-primary" /> SkillMapr Job Matcher</h1>
                     <p className="text-muted-foreground mt-2">Upload your resume, select a category, and instantly see your eligibility and a personalized learning path.</p>
                 </div>
-                
+
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start mb-8">
                     <Card className="lg:col-span-1 shadow-lg">
                         <CardHeader>
                             <CardTitle>Your Information</CardTitle>
                             <CardDescription>Provide your details to start.</CardDescription>
                         </CardHeader>
-                         <CardContent className="space-y-6">
+                        <CardContent className="space-y-6">
                             <div>
                                 <Label className="font-semibold">1. Upload Your Resume</Label>
                                 <Label htmlFor="resume-upload" className="mt-2 flex flex-col items-center justify-center w-full px-6 py-10 border-2 border-dashed rounded-lg cursor-pointer border-gray-300 dark:border-gray-600 hover:border-primary dark:hover:border-primary transition-colors">
@@ -198,7 +198,7 @@ export default function RecruitmentMatcherPage() {
 
                     <div className="lg:col-span-2">
                         <Card className="shadow-lg">
-                             <CardHeader>
+                            <CardHeader>
                                 <CardTitle>Job Listings Marketplace: <span className="capitalize text-primary">{selectedCategory}</span></CardTitle>
                                 <CardDescription>Click the button below to match your resume against these opportunities.</CardDescription>
                             </CardHeader>
@@ -216,18 +216,18 @@ export default function RecruitmentMatcherPage() {
                                                         <p className="text-xs text-muted-foreground">{job.role}</p>
                                                         <Badge variant={job.type === 'Internship' ? 'secondary' : 'default'} className="mt-1 text-xs">{job.type}</Badge>
                                                         {eligibilityResults[job.companyName] && (
-                                                            <div className={cn("absolute top-1 right-1 w-5 h-5 rounded-full flex items-center justify-center", 
+                                                            <div className={cn("absolute top-1 right-1 w-5 h-5 rounded-full flex items-center justify-center",
                                                                 eligibilityResults[job.companyName] === 'Eligible' ? 'bg-green-500' : 'bg-red-500')}>
-                                                                {eligibilityResults[job.companyName] === 'Eligible' ? <CheckCircle className="w-3 h-3 text-white" /> : <XCircle className="w-3 h-3 text-white"/>}
+                                                                {eligibilityResults[job.companyName] === 'Eligible' ? <CheckCircle className="w-3 h-3 text-white" /> : <XCircle className="w-3 h-3 text-white" />}
                                                             </div>
                                                         )}
                                                     </Card>
                                                 </DialogTrigger>
                                                 <DialogContent className="sm:max-w-[600px]">
-                                                     <DialogHeader>
+                                                    <DialogHeader>
                                                         <DialogTitle className="text-2xl flex items-center gap-4">
                                                             <div className="w-16 h-16 relative">
-                                                              <Image src={job.logoUrl} alt={`${job.companyName} logo`} fill className="object-contain"/>
+                                                                <Image src={job.logoUrl} alt={`${job.companyName} logo`} fill className="object-contain" />
                                                             </div>
                                                             <div>
                                                                 {job.companyName}
@@ -240,11 +240,11 @@ export default function RecruitmentMatcherPage() {
                                                             </div>
                                                         )}
                                                         <DialogDescription className="pt-4 text-left">
-                                                           {job.description}
+                                                            {job.description}
                                                         </DialogDescription>
                                                     </DialogHeader>
                                                     <div className="grid gap-4 py-4">
-                                                         <div className="space-y-2">
+                                                        <div className="space-y-2">
                                                             <h4 className="font-semibold">Package (LPA)</h4>
                                                             <p className="text-sm text-muted-foreground">{job.packageLPA} LPA</p>
                                                         </div>
@@ -254,7 +254,7 @@ export default function RecruitmentMatcherPage() {
                                                         </div>
                                                         <div className="space-y-2">
                                                             <h4 className="font-semibold">Minimum CGPA</h4>
-                                                             <p className="text-sm text-muted-foreground">{job.cgpa}</p>
+                                                            <p className="text-sm text-muted-foreground">{job.cgpa}</p>
                                                         </div>
                                                         <div className="space-y-2">
                                                             <h4 className="font-semibold">Required Skills</h4>
@@ -286,7 +286,7 @@ export default function RecruitmentMatcherPage() {
                         Analyze My Eligibility
                     </Button>
                 </div>
-                
+
                 <div ref={resultsRef} className="mt-12">
                     {analysisReport && (
                         <>
@@ -314,31 +314,31 @@ export default function RecruitmentMatcherPage() {
                                                 <h4 className="font-semibold text-sm">Reason:</h4>
                                                 <p className="text-muted-foreground text-sm">{evaluation.reason}</p>
                                             </div>
-                                            
+
                                             <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg dark:bg-amber-900/20 dark:border-amber-500/30">
                                                 <h4 className="font-semibold text-sm flex items-center gap-2 text-amber-800 dark:text-amber-300"><Lightbulb className="w-4 h-4" />Your Personalized Learning Path</h4>
                                                 <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
                                                     <div>
-                                                        <h5 className="font-semibold flex items-center gap-2 mb-2"><BookOpen className="w-4 h-4"/>Courses to Take</h5>
+                                                        <h5 className="font-semibold flex items-center gap-2 mb-2"><BookOpen className="w-4 h-4" />Courses to Take</h5>
                                                         <ul className="list-disc pl-5 space-y-1 text-amber-700 dark:text-amber-400">
                                                             {evaluation.learningPath.courses.map((course, i) => <li key={i}>{course}</li>)}
                                                         </ul>
                                                     </div>
                                                     <div>
-                                                        <h5 className="font-semibold flex items-center gap-2 mb-2"><Target className="w-4 h-4"/>Projects to Build</h5>
+                                                        <h5 className="font-semibold flex items-center gap-2 mb-2"><Target className="w-4 h-4" />Projects to Build</h5>
                                                         <ul className="list-disc pl-5 space-y-1 text-amber-700 dark:text-amber-400">
-                                                             {evaluation.learningPath.projects.map((project, i) => <li key={i}>{project}</li>)}
+                                                            {evaluation.learningPath.projects.map((project, i) => <li key={i}>{project}</li>)}
                                                         </ul>
                                                     </div>
                                                     <div>
-                                                        <h5 className="font-semibold flex items-center gap-2 mb-2"><Award className="w-4 h-4"/>Certifications to Earn</h5>
-                                                         <ul className="list-disc pl-5 space-y-1 text-amber-700 dark:text-amber-400">
+                                                        <h5 className="font-semibold flex items-center gap-2 mb-2"><Award className="w-4 h-4" />Certifications to Earn</h5>
+                                                        <ul className="list-disc pl-5 space-y-1 text-amber-700 dark:text-amber-400">
                                                             {evaluation.learningPath.certifications.map((cert, i) => <li key={i}>{cert}</li>)}
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
-                                            
+
                                             {evaluation.suggestions && (
                                                 <div>
                                                     <h4 className="font-semibold text-sm">Alternative Roles:</h4>

@@ -14,6 +14,7 @@ from services.parser import (
 from services.roadmap import generate_learning_path, generate_explanation, export_learning_graph
 from db.mongo import get_sessions_collection
 from utils.file_handler import get_text_input, extract_text_from_file
+from services.firebase_admin_service import get_uid_from_request
 
 analyze_bp = Blueprint("analyze", __name__)
 
@@ -113,6 +114,13 @@ def analyze():
     except ValueError as e:
         return _error(f"Job description input error: {e}", 400)
 
+    # ── Extract Firebase UID ─────────────────────────────────────────────────────
+    user_uid = get_uid_from_request(request)
+    if user_uid:
+        print(f"👤 User UID: {user_uid}")
+    else:
+        print("⚠️  No user UID provided — session will be anonymous")
+
     print(f"📝 Resume text length: {len(resume_text)} chars")
     print(f"📝 JD text length: {len(jd_text)} chars")
 
@@ -193,6 +201,7 @@ def analyze():
     try:
         doc = {
             "created_at": datetime.now(timezone.utc),
+            "user_uid": user_uid,
             "resume_text": resume_text,
             "jd_text": jd_text,
             "role_title": role_title,

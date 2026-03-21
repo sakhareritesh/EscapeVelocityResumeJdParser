@@ -1,5 +1,5 @@
 
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { Navbar } from '@/components/navbar';
@@ -13,7 +13,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Parichay',
+  title: 'SkillMapr',
   description: 'Generate beautiful portfolio websites with AI',
 };
 

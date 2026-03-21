@@ -52,7 +52,7 @@ const faqQuestions: Record<string, string[]> = {
   ],
 };
 
-const ParichayBotLogo = (props: React.SVGProps<SVGSVGElement>) => (
+const SkillMaprBotLogo = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 100 100"
@@ -111,10 +111,10 @@ export function Chatbot() {
 
   useEffect(() => {
     if (scrollAreaRef.current) {
-        const scrollableNode = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
-        if(scrollableNode) {
-            scrollableNode.scrollTop = scrollableNode.scrollHeight;
-        }
+      const scrollableNode = scrollAreaRef.current.querySelector('div[data-radix-scroll-area-viewport]');
+      if (scrollableNode) {
+        scrollableNode.scrollTop = scrollableNode.scrollHeight;
+      }
     }
   }, [messages]);
 
@@ -124,7 +124,7 @@ export function Chatbot() {
       setIsGreeting(false);
     }
   };
-  
+
   const handleFaqClick = async (question: string) => {
     if (isLoading) return;
 
@@ -146,7 +146,7 @@ export function Chatbot() {
           title: 'Error',
           description: result.error || 'Failed to get a response from the bot.',
         });
-         setMessages(messages);
+        setMessages(messages);
       }
     } catch (error) {
       toast({
@@ -187,29 +187,29 @@ export function Chatbot() {
         setMessages(messages); // revert messages if there was an error
       }
     } catch (error) {
-       toast({
-          variant: 'destructive',
-          title: 'Error',
-          description: 'Failed to get a response from the bot.',
-       });
-       setMessages(messages); // revert messages if there was an error
+      toast({
+        variant: 'destructive',
+        title: 'Error',
+        description: 'Failed to get a response from the bot.',
+      });
+      setMessages(messages); // revert messages if there was an error
     } finally {
-       setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
   return (
     <>
-      <div className={cn("fixed bottom-4 right-4 z-50 transition-all duration-300", 
+      <div className={cn("fixed bottom-4 right-4 z-50 transition-all duration-300",
         isGreeting ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2 pointer-events-none"
       )}>
         <Card className="max-w-xs bg-background/80 backdrop-blur-sm shadow-2xl">
           <CardContent className="p-4 flex items-center gap-4">
-             <div className="p-1 rounded-full">
-                <ParichayBotLogo className="w-10 h-10" />
+            <div className="p-1 rounded-full">
+              <SkillMaprBotLogo className="w-10 h-10" />
             </div>
             <div>
-              <p className="font-semibold">Hello, this is ParichayBOT!</p>
+              <p className="font-semibold">Hello, this is SkillMaprBOT!</p>
               <p className="text-sm text-muted-foreground">How can I help you?</p>
             </div>
             <Button variant="ghost" size="icon" className="shrink-0" onClick={() => setIsGreeting(false)}><X className="w-4 h-4" /></Button>
@@ -223,7 +223,7 @@ export function Chatbot() {
           className="rounded-full w-16 h-16 shadow-lg neon-glow flex items-center justify-center bg-transparent p-0 overflow-hidden"
           onClick={handleToggle}
         >
-          {isOpen ? <X className="w-8 h-8 text-primary" /> : <ParichayBotLogo className="w-full h-full scale-110" />}
+          {isOpen ? <X className="w-8 h-8 text-primary" /> : <SkillMaprBotLogo className="w-full h-full scale-110" />}
         </Button>
       </div>
 
@@ -234,9 +234,9 @@ export function Chatbot() {
         <CardHeader className="flex-row items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-1 rounded-full">
-                <ParichayBotLogo className="w-8 h-8" />
+              <SkillMaprBotLogo className="w-8 h-8" />
             </div>
-            <CardTitle>ParichayBOT</CardTitle>
+            <CardTitle>SkillMaprBOT</CardTitle>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -271,22 +271,22 @@ export function Chatbot() {
               ) : (
                 messages.map((message, index) => (
                   <div key={index} className={cn("flex items-start gap-3", message.role === 'user' ? 'justify-end' : '')}>
-                    {message.role === 'model' && <div className="p-1 rounded-full"><ParichayBotLogo className="w-8 h-8" /></div>}
+                    {message.role === 'model' && <div className="p-1 rounded-full"><SkillMaprBotLogo className="w-8 h-8" /></div>}
                     <div className={cn("p-3 rounded-lg max-w-[80%]", message.role === 'user' ? 'bg-primary text-primary-foreground' : 'bg-muted')}>
                       <p className="text-sm whitespace-pre-wrap">{message.content}</p>
                     </div>
-                     {message.role === 'user' && <div className="bg-muted p-2 rounded-full"><User className="w-6 h-6 text-muted-foreground" /></div>}
+                    {message.role === 'user' && <div className="bg-muted p-2 rounded-full"><User className="w-6 h-6 text-muted-foreground" /></div>}
                   </div>
                 ))
               )}
-               {isLoading && (
-                  <div className="flex items-start gap-3">
-                    <div className="p-1 rounded-full"><ParichayBotLogo className="w-8 h-8" /></div>
-                    <div className="p-3 rounded-lg bg-muted">
-                        <Loader2 className="w-5 h-5 animate-spin" />
-                    </div>
+              {isLoading && (
+                <div className="flex items-start gap-3">
+                  <div className="p-1 rounded-full"><SkillMaprBotLogo className="w-8 h-8" /></div>
+                  <div className="p-3 rounded-lg bg-muted">
+                    <Loader2 className="w-5 h-5 animate-spin" />
                   </div>
-                )}
+                </div>
+              )}
             </div>
           </ScrollArea>
           <form onSubmit={handleSubmit} className="p-4 border-t">
@@ -294,7 +294,7 @@ export function Chatbot() {
               <Input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder="Ask ParichayBOT..."
+                placeholder="Ask SkillMaprBOT..."
                 className="pr-12"
                 disabled={isLoading}
               />

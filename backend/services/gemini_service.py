@@ -14,7 +14,7 @@ load_dotenv()
 # ── Configuration ──────────────────────────────────────────────────────────────
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 # gemini-2.0-flash: 2,000 req/day free tier — best for demos
-MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+MODEL_NAME = os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
 MAX_RETRIES = 5
 RETRY_DELAY = 2
 

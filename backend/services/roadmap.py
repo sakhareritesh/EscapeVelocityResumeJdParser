@@ -214,6 +214,21 @@ def build_skill_dependency_graph(
                     })
                     G.add_edge(prereq, skill_name)
 
+    # ── Fallback: Use Gemini to discover dependencies if none found ────────
+    if len(G.edges()) == 0 and len(gap_skill_names) >= 2:
+        try:
+            ai_edges = _discover_dependencies_via_llm(gap_skill_names)
+            for edge in ai_edges:
+                src = edge.get("source", "")
+                tgt = edge.get("target", "")
+                # Only add edges between skills that exist as nodes
+                src_match = _find_node_match(G, src)
+                tgt_match = _find_node_match(G, tgt)
+                if src_match and tgt_match and src_match != tgt_match:
+                    G.add_edge(src_match, tgt_match)
+        except Exception as e:
+            print(f"⚠️  LLM dependency discovery failed (non-fatal): {e}")
+
     # Ensure no cycles
     if not nx.is_directed_acyclic_graph(G):
         # Remove edges that create cycles
@@ -226,6 +241,47 @@ def build_skill_dependency_graph(
             pass
 
     return G
+
+
+def _find_node_match(G: nx.DiGraph, name: str) -> str | None:
+    """Find a node in the graph matching the given name (case-insensitive)."""
+    norm = _normalize(name)
+    for node in G.nodes():
+        if _normalize(node) == norm:
+            return node
+    return None
+
+
+def _discover_dependencies_via_llm(skills: list[str]) -> list[dict]:
+    """
+    Ask Gemini to identify prerequisite relationships between a set of skills.
+    Returns a list of {"source": "A", "target": "B"} edges meaning "learn A before B".
+    """
+    skills_str = ", ".join(skills)
+    prompt = f"""You are a learning path expert. Given these skills that a candidate needs to learn:
+
+{skills_str}
+
+Identify which skills should be learned BEFORE others (prerequisite relationships).
+For each dependency, provide a "source" (learn first) and "target" (learn after).
+Only include genuine prerequisite relationships where one skill is foundational to another.
+
+Return ONLY a valid JSON object (no markdown, no extra text):
+{{
+  "edges": [
+    {{"source": "Skill A", "target": "Skill B"}},
+    {{"source": "Skill A", "target": "Skill C"}}
+  ]
+}}
+
+Use the EXACT skill names as provided. If no clear prerequisites exist between these skills,
+still try to identify at least a logical learning order (e.g. foundational concepts before
+specialized ones). Return at least 1 edge if there are 2+ skills.
+"""
+    result = generate_response(prompt)
+    if isinstance(result, dict) and "edges" in result:
+        return result["edges"]
+    return []
 
 
 def _get_category(skill_name: str) -> str:

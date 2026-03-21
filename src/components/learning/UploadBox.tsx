@@ -98,7 +98,7 @@ export function UploadBox({ label, accept = '.pdf', file, onFileSelect }: Upload
                             Drop your file here, or{' '}
                             <span className="text-[#0a66c2] font-semibold">browse</span>
                         </p>
-                        <p className="text-xs text-gray-400 mt-1">Supports {accept.toUpperCase().replace('.', '')} files</p>
+                        <p className="text-xs text-gray-400 mt-1">Supports {accept.split(',').map(e => e.trim().replace('.', '').toUpperCase()).join(', ')} files</p>
                     </motion.div>
                 )}
             </AnimatePresence>

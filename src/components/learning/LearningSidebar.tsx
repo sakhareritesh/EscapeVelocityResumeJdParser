@@ -10,7 +10,6 @@ import {
     BookOpen,
     Search,
     Sparkles,
-    Award,
     HelpCircle,
     X,
     Wand2,
@@ -18,6 +17,10 @@ import {
     Palette,
     Star,
     User,
+    Upload,
+    BarChart3,
+    Route,
+    MessageSquareText,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -30,6 +33,15 @@ const sidebarSections = [
     {
         items: [
             { href: '/', label: 'Home', icon: Home },
+        ],
+    },
+    {
+        title: 'Onboarding Flow',
+        items: [
+            { href: '/upload-resume', label: 'Upload Resume', icon: Upload },
+            { href: '/skill-analysis', label: 'Skill Analysis', icon: BarChart3 },
+            { href: '/learning-roadmap', label: 'Learning Roadmap', icon: Route },
+            { href: '/ai-coaching', label: 'SkillMapr Coaching', icon: Sparkles },
         ],
     },
     {
@@ -49,16 +61,10 @@ const sidebarSections = [
     {
         title: 'AI Tools',
         items: [
-            { href: '/ai-coaching', label: 'AI Coaching', icon: Sparkles },
-            { href: '/ai-matcher', label: 'AI Job Matcher', icon: BriefcaseBusiness },
+            { href: '/ai-matcher', label: 'SkillMapr Job Matcher', icon: BriefcaseBusiness },
         ],
     },
-    {
-        title: 'Practice',
-        items: [
-            { href: '/certifications', label: 'Certifications', icon: Award },
-        ],
-    },
+
     {
         title: 'Create',
         items: [
@@ -117,7 +123,7 @@ export function LearningSidebar({ isOpen, onClose }: LearningSidebarProps) {
                     <div className="w-7 h-7 bg-primary rounded flex items-center justify-center">
                         <Wand2 className="w-4 h-4 text-primary-foreground" />
                     </div>
-                    <span className="font-semibold text-[15px] text-gray-900 dark:text-foreground">Parichay</span>
+                    <span className="font-semibold text-[15px] text-gray-900 dark:text-foreground">SkillMapr</span>
                 </div>
 
                 {/* Nav items */}

@@ -5,13 +5,14 @@ import { getDatabase, Database } from "firebase/database";
 import { getFirestore, Firestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC13fCGzh5R_pLTYJAXxSe6o4cbiGLMSOU",
-  authDomain: "codecrush-enrqe.firebaseapp.com",
-  projectId: "codecrush-enrqe",
-  storageBucket: "codecrush-enrqe.appspot.com",
-  messagingSenderId: "721183583766",
-  appId: "1:721183583766:web:caf045f5fd781d862c8f37",
-  databaseURL: "https://codecrush-enrqe-default-rtdb.firebaseio.com"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
 };
 
 let app: FirebaseApp;
@@ -20,9 +21,9 @@ let db: Database;
 let firestore: Firestore;
 
 if (getApps().length === 0) {
-    app = initializeApp(firebaseConfig);
+  app = initializeApp(firebaseConfig);
 } else {
-    app = getApp();
+  app = getApp();
 }
 
 auth = getAuth(app);

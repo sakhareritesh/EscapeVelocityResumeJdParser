@@ -1,0 +1,202 @@
+════════════════════════════════════════════════════════════════════════
+  🧠  AI Adaptive Onboarding Engine — Analysis Report
+════════════════════════════════════════════════════════════════════════
+
+  ── Target Role ─────────────────────────────────────────────────
+     Role       :  Reporting and Data Analyst
+     Seniority  :  Mid-level
+     Domain     :  Data Analytics / Business Intelligence (Automotive R&D)
+     Session ID :  69bd9c9c262a690f0e28fc5f
+
+  ── Candidate Match Score ───────────────────────────────────────
+
+     [███████░░░░░░░░░░░░░]  39.3% skill match
+
+     Resume Skills :  22
+     Required by JD:  28
+     Skill Gaps    :  17
+     Learning Steps:  18
+     Est. Time     :  590h  (~29 weeks at 20h/week)
+
+  ── Resume Skills  (22 found) ───────────────────────────────────
+
+     Backend Frameworks
+       🔵 Flask Advanced (2y) — Built backend APIs for Q&A platform and GenAI ordering syste
+
+     Data Ml
+       🟡 TensorFlow Beginner (1y) — Listed as a machine learning library in skills section.
+       🟡 Keras Beginner (1y) — Listed as a machine learning library in skills section.
+       🟡 PyTorch Beginner (1y) — Listed as a machine learning library in skills section.
+       🟢 NumPy Intermediate (2y) — Used for numerical operations in machine learning contexts.
+       🟢 Pandas Intermediate (2y) — Used for data manipulation and analysis in machine learning 
+       🟡 OpenCV Beginner (1y) — Listed as a computer vision library in skills section.
+       🟡 LangChain Beginner — Listed as a machine learning framework in skills section.
+
+     Databases
+       🟡 MySQL Beginner (1y) — Listed as a database technology in skills section.
+       🟡 MongoDB Beginner (1y) — Listed as a database technology in skills section.
+
+     Frontend Frameworks
+       🟡 Bootstrap Beginner (1y) — Listed as a web development framework in skills section.
+
+     Other
+       🟡 Langflow Beginner — Listed as a machine learning tool in skills section.
+       🔵 Natural Language Processing (NLP) Advanced (2y) — Applied for resume parsing, content generation, and AI-drive
+       🟢 Retrieval-Augmented Generation (RAG) Intermediate (1y) — Delivered a talk on RAG models, indicating practical underst
+       🟢 Tailwind CSS Intermediate (1y) — Styled the StackIt Q&A forum platform.
+
+     Programming Languages
+       🔵 Python Advanced (3y) — Built web platforms with Flask, developed ML models, integra
+       🟢 C++ Intermediate (2y) — Studied and certified in programming fundamentals.
+       🟢 C Intermediate (2y) — Studied and certified in programming fundamentals.
+       🟢 HTML Intermediate (2y) — Developed front-end for web application firewall and other p
+       🟢 JavaScript Intermediate (2y) — Developed front-end logic for web applications, implied with
+       🟢 TypeScript Intermediate (1y) — Used in modern web development projects with Next.js.
+       🟢 CSS Intermediate (2y) — Styled web interfaces for projects, including Transformer WA
+
+  ── Skill Gaps  (17 missing required skills) ────────────────────
+     ✗  AI Implementation  [Other]
+     ✗  AI Models  [Other]
+     ✗  AWS  [Cloud Platforms]
+     ✗  Azure  [Cloud Platforms]
+     ✗  Dashboard Development  [Other]
+     ✗  Data Analysis  [Other]
+     ✗  Data Automation  [Other]
+     ✗  Data Manipulation  [Other]
+     ✗  Data Quality  [Other]
+     ✗  Data Transformation  [Other]
+     ✗  Data Visualization  [Other]
+     ✗  ETL  [Other]
+     ✗  KPI Definition  [Other]
+     ✗  Power BI  [Data Ml]  (you know: TensorFlow, Keras, PyTorch, NumPy, Pandas)
+     ✗  Problem Solving  [Other]
+     ✗  Qlik  [Other]
+     ✗  Reporting  [Other]
+
+  ── Skill Dependency Graph (DAG) ────────────────────────────────
+     Nodes : 18   Edges : 2   Total: 590h
+
+     Prerequisite relationships:
+       cloud computing basics ──→ AWS
+       cloud computing basics ──→ Azure
+
+  ── Personalised Learning Roadmap  (18 steps) ───────────────────
+
+     Step  1  cloud computing basics  🟡 Medium  30h  (total so far: 30h)  [auto-added prereq]
+            Required for the target role. A new skill area to develop.
+
+     Step  2  AI Implementation  🟡 Medium  30h  (total so far: 60h)
+            Required for the target role. A new skill area to develop.
+
+     Step  3  AI Models  🟡 Medium  30h  (total so far: 90h)
+            Required for the target role. A new skill area to develop.
+
+     Step  4  Dashboard Development  🟡 Medium  30h  (total so far: 120h)
+            Required for the target role. A new skill area to develop.
+
+     Step  5  Data Analysis  🟡 Medium  30h  (total so far: 150h)
+            Required for the target role. A new skill area to develop.
+
+     Step  6  Data Automation  🟡 Medium  30h  (total so far: 180h)
+            Required for the target role. A new skill area to develop.
+
+     Step  7  Data Manipulation  🟡 Medium  30h  (total so far: 210h)
+            Required for the target role. A new skill area to develop.
+
+     Step  8  Data Quality  🟡 Medium  30h  (total so far: 240h)
+            Required for the target role. A new skill area to develop.
+
+     Step  9  Data Transformation  🟡 Medium  30h  (total so far: 270h)
+            Required for the target role. A new skill area to develop.
+
+     Step 10  Data Visualization  🟡 Medium  30h  (total so far: 300h)
+            Required for the target role. A new skill area to develop.
+
+     Step 11  ETL  🟡 Medium  30h  (total so far: 330h)
+            Required for the target role. A new skill area to develop.
+
+     Step 12  KPI Definition  🟡 Medium  30h  (total so far: 360h)
+            Required for the target role. A new skill area to develop.
+
+     Step 13  Power BI  🟡 Medium  30h  (total so far: 390h)
+            Required for the target role. A new skill area to develop.
+
+     Step 14  Problem Solving  🟡 Medium  30h  (total so far: 420h)
+            Required for the target role. A new skill area to develop.
+
+     Step 15  Qlik  🟡 Medium  30h  (total so far: 450h)
+            Required for the target role. A new skill area to develop.
+
+     Step 16  Reporting  🟡 Medium  30h  (total so far: 480h)
+            Required for the target role. A new skill area to develop.
+
+     Step 17  Azure  🟡 Medium  50h  (total so far: 530h)
+            Required for the target role. A new skill area to develop.
+
+     Step 18  AWS  🟡 Medium  60h  (total so far: 590h)
+            Required for the target role. A new skill area to develop.
+
+  ── AI Coaching Explanation ─────────────────────────────────────
+     Welcome to the team! We are absolutely thrilled to have you join us.
+     Looking at your profile, it's clear you bring a formidable set of
+     technical skills and a strong foundation that will be incredibly
+     valuable. Your advanced proficiency in Python and Natural Language
+     Processing (NLP) stands out, demonstrating a deep capability in core
+     areas. Furthermore, your intermediate skills in C++, C, HTML,
+     JavaScript, TypeScript, NumPy, Pandas, Flask, CSS, and Tailwind CSS
+     showcase a broad and versatile technical toolkit. These existing
+     strengths provide an excellent springboard for your journey here,
+     and we are excited to see how you will leverage them.
+
+     It's completely normal for a new role to come with specific
+     requirements that build upon your existing expertise, and this is
+     where our personalized onboarding plan comes in. The identified
+     skill gaps, such as AI Implementation, AI Models, AWS, Azure,
+     Dashboard Development, Data Analysis, Data Automation, Data
+     Manipulation, Data Quality, Data Transformation, Data Visualization,
+     ETL, KPI Definition, Power BI, Problem Solving, Qlik, and Reporting,
+     are not a reflection of your capabilities but rather the specialized
+     demands of this particular position. While you possess strong
+     programming and analytical foundations, this role requires a deeper
+     dive into specific data engineering practices, business intelligence
+     tools, and cloud platforms to effectively implement AI solutions and
+     drive data-driven insights within our operational context.
+
+     To ensure your learning journey is as efficient and effective as
+     possible, your personalized learning path has been meticulously
+     crafted using a sophisticated graph-based dependency algorithm. This
+     intelligent system analyzes the relationships between skills,
+     ensuring that you acquire foundational knowledge before moving on to
+     more advanced or dependent topics. For instance, you'll begin with
+     cloud computing basics, which logically precedes the more specific
+     platforms like Azure and AWS. You'll then progress through core data
+     concepts such as Data Analysis, Data Manipulation, Data
+     Transformation, ETL, Data Automation, and Data Quality, building a
+     robust understanding of how data flows and is refined. Success in
+     these initial phases means confidently grasping the fundamental
+     principles and being able to apply them in practical, foundational
+     scenarios.
+
+     As you advance, you'll move into the critical areas of AI
+     Implementation and AI Models, where success will mean understanding
+     how to integrate and work with various AI frameworks. Following
+     this, you'll tackle Dashboard Development, Data Visualization, KPI
+     Definition, Power BI, Qlik, and Reporting, where you'll learn to
+     translate complex data into actionable insights and compelling
+     visual stories. The final stages will see you mastering Azure and
+     AWS, enabling you to deploy and manage solutions within these
+     essential cloud environments. This comprehensive journey, estimated
+     to take approximately 590 hours, or about 29 weeks at 20 hours per
+     week, is a significant investment in your growth. We are fully
+     committed to supporting you every step of the way, and we are
+     confident that by embracing this structured learning path, you will
+     not only bridge these gaps but also emerge as an invaluable and
+     highly skilled contributor to our team. We're excited to see you
+     thrive!
+
+
+════════════════════════════════════════════════════════════════════════
+  ✅  Analysis complete.
+════════════════════════════════════════════════════════════════════════
+
+(venv) samyakraka@Samyak-MacBook-Air backend %

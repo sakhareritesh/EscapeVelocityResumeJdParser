@@ -25,7 +25,7 @@ export function DashboardNavbar() {
             <Wand2 className="w-6 h-6 text-primary-foreground" />
           </div>
           <div>
-            <span className="font-bold text-lg">Parichay Pro</span>
+            <span className="font-bold text-lg">SkillMapr Pro</span>
             <p className="text-xs text-muted-foreground -mt-1">AI-Powered Dashboard</p>
           </div>
         </Link>
@@ -33,15 +33,15 @@ export function DashboardNavbar() {
           {user && (
             <>
               <Button variant="ghost" asChild>
-                  <Link href="/user/profile"><User className="mr-2 h-4 w-4" /> My Profile</Link>
+                <Link href="/user/profile"><User className="mr-2 h-4 w-4" /> My Profile</Link>
               </Button>
               <Button variant="ghost" asChild>
-                  <Link href="/admin/recruitment"><UserCog className="mr-2 h-4 w-4" /> AI Matcher</Link>
+                <Link href="/admin/recruitment"><UserCog className="mr-2 h-4 w-4" /> AI Matcher</Link>
               </Button>
               <Button variant="ghost" asChild>
-                  <Link href="/spin"><Star className="mr-2 h-4 w-4" /> Spin to Win</Link>
+                <Link href="/spin"><Star className="mr-2 h-4 w-4" /> Spin to Win</Link>
               </Button>
-               <Button variant="outline" onClick={handleSignOut}>
+              <Button variant="outline" onClick={handleSignOut}>
                 <LogOut className="mr-2 h-4 w-4" /> Sign Out
               </Button>
             </>

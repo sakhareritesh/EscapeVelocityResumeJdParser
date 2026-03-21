@@ -26,7 +26,6 @@ export function Navbar() {
     pathname.startsWith('/my-content') ||
     pathname.startsWith('/browse') ||
     pathname.startsWith('/ai-coaching') ||
-    pathname.startsWith('/certifications') ||
     pathname.startsWith('/create') ||
     pathname.startsWith('/spin') ||
     pathname.startsWith('/profile') ||
@@ -45,8 +44,8 @@ export function Navbar() {
             <Wand2 className="w-5 h-5 text-primary-foreground" />
           </div>
           <div className="flex flex-col">
-            <span className="font-bold text-lg">Parichay</span>
-            <span className="text-xs text-muted-foreground -mt-1">Powered by Advanced AI</span>
+            <span className="font-bold text-lg">SkillMapr</span>
+            <span className="text-xs text-muted-foreground -mt-1"></span>
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">

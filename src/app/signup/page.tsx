@@ -41,13 +41,13 @@ export default function SignupPage() {
   const form = useForm<SignupFormValues>({
     resolver: zodResolver(signupFormSchema),
   });
-  
+
   const handleSignup: SubmitHandler<SignupFormValues> = async (data) => {
     setIsLoading(true);
     setSignupError(null);
     try {
       await signup(data.email, data.password, `${data.firstName} ${data.lastName}`);
-      toast({ title: 'Account Created!', description: 'Welcome to Parichay.' });
+      toast({ title: 'Account Created!', description: 'Welcome to SkillMapr.' });
       router.push('/');
     } catch (error: any) {
       const errorMessage = error.code ? error.code.replace('auth/', '').replace(/-/g, ' ') : error.message;
@@ -60,9 +60,9 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-muted/40 p-4">
       <Card className="mx-auto max-w-sm w-full bg-background">
-         <CardHeader>
-           <div className="flex justify-center mb-4">
-             <Wand2 className="w-12 h-12 text-primary" />
+        <CardHeader>
+          <div className="flex justify-center mb-4">
+            <Wand2 className="w-12 h-12 text-primary" />
           </div>
           <CardTitle className="text-2xl text-center">Create an Account</CardTitle>
           <CardDescription className="text-center">
@@ -80,7 +80,7 @@ export default function SignupPage() {
               <div className="grid gap-2">
                 <Label htmlFor="last-name">Last name</Label>
                 <Input id="last-name" placeholder="Robinson" {...form.register('lastName')} />
-                 {form.formState.errors.lastName && <p className="text-destructive text-sm mt-1">{form.formState.errors.lastName.message}</p>}
+                {form.formState.errors.lastName && <p className="text-destructive text-sm mt-1">{form.formState.errors.lastName.message}</p>}
               </div>
             </div>
             <div className="grid gap-2">
@@ -98,14 +98,14 @@ export default function SignupPage() {
               <Input id="password" type="password" {...form.register('password')} />
               {form.formState.errors.password && <p className="text-destructive text-sm mt-1">{form.formState.errors.password.message}</p>}
             </div>
-            
+
             {signupError && (
-                <Alert variant="destructive">
-                    <AlertCircle className="h-4 w-4" />
-                    <AlertDescription className="font-semibold capitalize">
-                        {signupError}
-                    </AlertDescription>
-                </Alert>
+              <Alert variant="destructive">
+                <AlertCircle className="h-4 w-4" />
+                <AlertDescription className="font-semibold capitalize">
+                  {signupError}
+                </AlertDescription>
+              </Alert>
             )}
 
             <Button type="submit" className="w-full" disabled={isLoading}>
