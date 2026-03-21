@@ -97,6 +97,21 @@ PORT=5000
 python app.py
 ```
 
+### 5. Run with Gunicorn (production)
+
+Use the WSGI module (no parentheses) so the shell does not choke on the app factory call:
+
+```bash
+gunicorn -w ${WEB_CONCURRENCY:-2} -k gthread --threads ${GTHREADS:-4} \
+  --bind 0.0.0.0:${PORT:-5000} --timeout 120 wsgi:app
+```
+
+If your platform requires a single command string (e.g., Render start command), set it to:
+
+```
+gunicorn -w ${WEB_CONCURRENCY:-2} -k gthread --threads ${GTHREADS:-4} --bind 0.0.0.0:${PORT:-5000} --timeout 120 wsgi:app
+```
+
 ### 5. Run the Test Suite
 
 The testing script validates the graph-building algorithm, metadata extraction, endpoint schemas, and DB saving:
