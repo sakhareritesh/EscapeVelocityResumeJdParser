@@ -1,8 +1,14 @@
 
-import type {NextConfig} from 'next';
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
+  serverExternalPackages: [
+    '@opentelemetry/sdk-node',
+    '@opentelemetry/exporter-jaeger',
+    '@opentelemetry/instrumentation-winston',
+    '@opentelemetry/winston-transport',
+  ],
   typescript: {
     ignoreBuildErrors: true,
   },
