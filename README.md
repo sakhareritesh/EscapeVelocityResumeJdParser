@@ -572,10 +572,10 @@ Built with ❤️ by **Team Escape Velocity**
 
 | Member | Role |
 |--------|------|
-| **Ritesh Sakhare** | Feature Ideation, Architecture & Database |
-| **Vedant Deore** | Frontend, Map System, Routing & AI Copilot |
-| **Samyak Raka** | UI Design & Development |
-| **Satyajit Shinde** | 3D Packing System (Three.js) |
+| **Ritesh Sakhare** 
+| **Vedant Deore** 
+| **Samyak Raka** 
+| **Satyajit Shinde**
 
 ---
 
