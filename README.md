@@ -1,205 +1,281 @@
-# 🧠 SkillMapr — AI-Adaptive Learning Platform
+<p align="center">
+  <img src="https://img.icons8.com/3d-fluency/94/brain.png" width="80" alt="SkillMapr Logo"/>
+</p>
 
-> Parse resumes, identify skill gaps, generate personalized learning pathways, and build stunning portfolios — all powered by AI.
+<h1 align="center">SkillMapr</h1>
+<h3 align="center">🚀 AI-Adaptive Learning & Career Intelligence Platform</h3>
 
-![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js)
-![Flask](https://img.shields.io/badge/Flask-3.0-blue?logo=flask)
-![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?logo=mongodb)
-![Firebase](https://img.shields.io/badge/Firebase-Auth-orange?logo=firebase)
-![Gemini](https://img.shields.io/badge/Google-Gemini-purple?logo=google)
+<p align="center">
+  <em>Parse resumes. Map skill gaps. Generate personalized learning roadmaps. Build stunning portfolios. All powered by AI.</em>
+</p>
+
+<p align="center">
+  <a href="#-features"><img src="https://img.shields.io/badge/Features-12+-7c3aed?style=for-the-badge&logo=sparkles&logoColor=white" alt="Features"/></a>
+  <a href="#-tech-stack"><img src="https://img.shields.io/badge/Full_Stack-Next.js_+_Flask-000?style=for-the-badge&logo=vercel&logoColor=white" alt="Full Stack"/></a>
+  <a href="#-quick-start"><img src="https://img.shields.io/badge/Quick_Start-5_min-22c55e?style=for-the-badge&logo=rocket&logoColor=white" alt="Quick Start"/></a>
+  <a href="#license"><img src="https://img.shields.io/badge/License-Proprietary-ef4444?style=for-the-badge&logo=lock&logoColor=white" alt="License"/></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-15-black?logo=next.js&logoColor=white" alt="Next.js"/>
+  <img src="https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white" alt="TypeScript"/>
+  <img src="https://img.shields.io/badge/Flask-3.0-000?logo=flask&logoColor=white" alt="Flask"/>
+  <img src="https://img.shields.io/badge/Python-3.11-3776AB?logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?logo=mongodb&logoColor=white" alt="MongoDB"/>
+  <img src="https://img.shields.io/badge/Firebase-Auth-FFCA28?logo=firebase&logoColor=black" alt="Firebase"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS"/>
+  <img src="https://img.shields.io/badge/Razorpay-Payments-0C2451?logo=razorpay&logoColor=white" alt="Razorpay"/>
+</p>
 
 ---
 
-## 📑 Table of Contents
+## 📋 Table of Contents
 
-- [Overview](#overview)
-- [Tech Stack](#tech-stack)
-- [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Environment Variables](#environment-variables)
-- [Local Development](#local-development)
-- [Build & Production](#build--production)
-- [Deployment](#deployment)
-- [API Endpoints](#api-endpoints)
+- [Overview](#-overview)
+- [Features](#-features)
+- [Architecture](#-architecture)
+- [Tech Stack](#-tech-stack)
+- [Project Structure](#-project-structure)
+- [Quick Start](#-quick-start)
+- [Environment Variables](#-environment-variables)
+- [API Reference](#-api-reference)
+- [Frontend Routes](#-frontend-routes)
+- [Deployment](#-deployment)
+- [NPM Scripts](#-npm-scripts)
+- [Contributing](#-contributing)
+- [Team](#-team)
 - [License](#license)
 
 ---
 
-## Overview
+## 🧠 Overview
 
-**SkillMapr** is a full-stack AI-powered platform that:
+**SkillMapr** is a production-ready, full-stack AI platform that bridges the gap between a job seeker's current skill set and their dream role. It combines advanced document parsing, Google NLP analysis, personalized learning roadmap generation, and a portfolio builder into a single, seamless experience.
 
-- 📄 **Parses resumes & job descriptions** (PDF, DOCX, TXT)
-- 🔍 **Identifies skill gaps** between a candidate and a job role
-- 🗺️ **Generates personalized learning roadmaps** with estimated hours, difficulty, and resources
-- 📊 **Visualizes dependency graphs** of skills to learn
-- 🎯 **AI Coaching** with tailored career advice via Google Gemini
-- 🔐 **Authentication** via Firebase (Google, Email/Password)
-- 💳 **Razorpay** payment integration
-- 🌗 **Dark/Light mode** with system theme detection
+### The Problem
 
----
+> Job seekers struggle to understand exactly which skills they lack for target roles and have no structured path to bridge those gaps efficiently.
 
-## Tech Stack
+### The Solution
 
-### Frontend (Next.js)
-
-| Technology       | Purpose                          |
-| ---------------- | -------------------------------- |
-| Next.js 15       | React framework (App Router)     |
-| TypeScript       | Type-safe development            |
-| Tailwind CSS 3   | Utility-first styling            |
-| shadcn/ui        | Radix-based component library    |
-| Framer Motion    | Animations & transitions         |
-| Firebase SDK     | Authentication & Realtime DB     |
-| Recharts         | Data visualization / charts      |
-| Razorpay         | Payment gateway                  |
-| GenKit           | Gemini AI integration            |
-
-### Backend (Flask)
-
-| Technology         | Purpose                        |
-| ------------------ | ------------------------------ |
-| Flask 3.0          | Python web framework           |
-| Gunicorn           | Production WSGI server         |
-| MongoDB (PyMongo)  | Database (Atlas cloud)         |
-| Google Generative AI | Gemini API for analysis      |
-| Firebase Admin SDK | Server-side token verification |
-| PyPDF2 / pdfplumber | PDF text extraction           |
-| python-docx        | DOCX text extraction           |
-| NetworkX           | Dependency graph generation    |
-
----
-
-## Project Structure
+SkillMapr automates the entire career development pipeline:
 
 ```
-EscapeVelocityResumeJdParser/
-├── src/                        # Next.js frontend source
-│   ├── app/                    # App Router pages & API routes
-│   │   ├── (dashboard)/        # Dashboard group routes
-│   │   ├── api/                # Next.js API routes
-│   │   ├── login/              # Login page
-│   │   ├── signup/             # Signup page
-│   │   ├── user/               # User profile pages
-│   │   ├── layout.tsx          # Root layout
-│   │   └── page.tsx            # Landing page
-│   ├── components/             # React components (52 files)
-│   ├── context/                # React context providers
-│   ├── hooks/                  # Custom React hooks
-│   └── lib/                    # Utilities & API client
-│       ├── backend-api.ts      # Flask backend API client
-│       ├── firebase.ts         # Firebase client config
-│       └── utils.ts            # Helper utilities
+📄 Upload Resume + JD  →  🔍 AI Skill Extraction  →  🎯 Gap Analysis  →  🗺️ Personalized Roadmap  →  🎨 Portfolio Builder
+```
+
+---
+
+## ✨ Features
+
+<table>
+<tr>
+<td width="50%">
+
+### 🔬 Core Intelligence
+| Feature | Description |
+|---------|-------------|
+| **📄 Smart Resume Parser** | NLP-powered extraction from PDF, DOCX & TXT with skill-level classification |
+| **📋 JD Analysis Engine** | Automatically identifies required competencies, experience levels & technical requirements |
+| **🎯 Dynamic Gap Mapping** | Precisely maps skill gaps between your profile and target role requirements |
+| **🗺️ Learning Roadmap** | AI-generated, ordered learning paths with estimated hours, difficulty & resources |
+| **📊 Dependency Graphs** | Visual skill dependency trees powered by NetworkX |
+| **🤖 AI Career Coach** | Personalized career advice via  with contextual understanding |
+
+</td>
+<td width="50%">
+
+### 🎨 Platform Features
+| Feature | Description |
+|---------|-------------|
+| **🎨 Portfolio Builder** | 15+ professionally designed templates with AI-enhanced content |
+| **💼 AI Job Matcher** | Intelligent matching between your profile and relevant opportunities |
+| **📈 Career Path Explorer** | Browse and explore various career trajectories with skill requirements |
+| **🎰 Gamification (Spin Wheel)** | Engagement mechanics to keep users motivated |
+| **💳 Razorpay Payments** | Subscription plans (Free / Monthly / Yearly) with secure checkout |
+| **🌗 Dark / Light Mode** | System theme detection with manual toggle |
+
+</td>
+</tr>
+</table>
+
+### 🔐 Authentication & Security
+- **Firebase Authentication** — Google OAuth + Email/Password sign-in
+- **Firebase Admin SDK** — Server-side token verification for all protected endpoints
+- **Role-based access** — Free tier, Pro monthly, and Pro yearly plans with usage quotas
+
+---
+
+## 🏛️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        CLIENT (Browser)                     │
+│                                                             │
+│  ┌───────────────────────────────────────────────────────┐  │
+│  │              Next.js 15 (App Router)                  │  │
+│  │  ┌──────────┐ ┌──────────┐ ┌───────────────────────┐ │  │
+│  │  │ shadcn/ui│ │ Framer   │ │ Firebase Client SDK   │ │  │
+│  │  │ + Radix  │ │ Motion   │ │ (Auth + Realtime DB)  │ │  │
+│  │  └──────────┘ └──────────┘ └───────────────────────┘ │  │
+│  │  ┌──────────┐ ┌──────────┐ ┌───────────────────────┐ │  │
+│  │  │ Recharts │ │ Razorpay │ │ GenKit (NLP)    │ │  │
+│  │  └──────────┘ └──────────┘ └───────────────────────┘ │  │
+│  └───────────────────────────────────────────────────────┘  │
+│                          │ REST API                         │
+└──────────────────────────┼──────────────────────────────────┘
+                           │
+┌──────────────────────────┼──────────────────────────────────┐
+│                   BACKEND (Flask 3.0)                       │
+│                          │                                  │
+│  ┌───────────┐ ┌─────────┴───────┐ ┌────────────────────┐  │
+│  │ Parser    │ │ NLP Service  │ │ Roadmap Generator  │  │
+│  │ (PDF/DOCX)│ │ (Skills + Gaps) │ │ (Learning Paths)   │  │
+│  └───────────┘ └─────────────────┘ └────────────────────┘  │
+│  ┌───────────┐ ┌─────────────────┐ ┌────────────────────┐  │
+│  │ Firebase  │ │  NetworkX       │ │  User Routes       │  │
+│  │ Admin SDK │ │  (Graphs)       │ │  (Sessions)        │  │
+│  └───────────┘ └─────────────────┘ └────────────────────┘  │
+│                          │                                  │
+└──────────────────────────┼──────────────────────────────────┘
+                           │
+              ┌────────────┴────────────┐
+              │    MongoDB Atlas        │
+              │  (Sessions, Analysis,   │
+              │   User Data, Results)   │
+              └─────────────────────────┘
+```
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+| Technology | Version | Purpose |
+|:-----------|:--------|:--------|
+| **Next.js** | 15 | React framework with App Router & Turbopack |
+| **React** | 18 | UI component library |
+| **TypeScript** | 5 | Type-safe development |
+| **Tailwind CSS** | 3 | Utility-first styling |
+| **shadcn/ui + Radix** | Latest | Accessible component primitives |
+| **Framer Motion** | 12 | Animations & page transitions |
+| **Recharts** | 2.x | Data visualization & charts |
+| **Firebase SDK** | 11 | Authentication & Realtime Database |
+| **Razorpay** | 2.x | Payment gateway integration |
+
+### Backend
+
+| Technology | Version | Purpose |
+|:-----------|:--------|:--------|
+| **Flask** | 3.0 | Lightweight Python web framework |
+| **Gunicorn** | Latest | Production WSGI HTTP server |
+| **MongoDB (PyMongo)** | 4.7 | Cloud database via Atlas |
+| **Firebase Admin SDK** | 6.5 | Server-side auth token verification |
+| **PyPDF2 + pdfplumber** | Latest | PDF text extraction |
+| **python-docx** | 1.1 | DOCX text extraction |
+| **NetworkX** | 3.3 | Skill dependency graph generation |
+
+---
+
+## 📁 Project Structure
+
+```
+SkillMapr/
 │
-├── backend/                    # Flask backend
-│   ├── app.py                  # Flask app factory
-│   ├── wsgi.py                 # WSGI entry point (production)
-│   ├── routes/
-│   │   ├── analyze.py          # /parse, /analyze, /session endpoints
-│   │   └── user.py             # /user/* endpoints
-│   ├── services/
-│   │   ├── gemini_service.py   # Google Gemini AI integration
-│   │   ├── parser.py           # Resume/JD text extraction
-│   │   ├── roadmap.py          # Learning path generation
-│   │   └── firebase_admin_service.py  # Firebase Admin SDK
-│   ├── db/
-│   │   └── mongo.py            # MongoDB connection manager
-│   ├── requirements.txt        # Python dependencies
-│   ├── Procfile                # Render/Heroku process file
-│   ├── build.sh                # Render build script
-│   ├── runtime.txt             # Python version (3.11.9)
-│   └── .env.example            # Backend env template
+├── 📂 src/                          # Next.js frontend source
+│   ├── 📂 app/                      # App Router pages & API routes
+│   │   ├── 📂 (dashboard)/          # Protected dashboard routes
+│   │   │   ├── ai-coaching/         #   └── AI career coaching chat
+│   │   │   ├── ai-matcher/          #   └── AI job matching
+│   │   │   ├── career-paths/        #   └── Explore career paths
+│   │   │   ├── create/              #   └── Portfolio builder
+│   │   │   ├── learning-roadmap/    #   └── Generated roadmaps
+│   │   │   ├── my-career-plan/      #   └── Personalized career plan
+│   │   │   ├── skill-analysis/      #   └── Skill analysis results
+│   │   │   ├── spin/                #   └── Gamification (spin wheel)
+│   │   │   ├── upload-resume/       #   └── Resume & JD upload
+│   │   │   └── profile/             #   └── User profile
+│   │   ├── 📂 api/                  # Next.js API routes
+│   │   ├── 📂 admin/                # Admin dashboard
+│   │   ├── login/                   # Login page
+│   │   ├── signup/                  # Signup page
+│   │   ├── layout.tsx               # Root layout
+│   │   └── page.tsx                 # Landing / Dashboard page
+│   ├── 📂 components/               # Reusable React components
+│   │   ├── 📂 ui/                   # shadcn/ui primitives
+│   │   ├── 📂 learning/             # Learning dashboard components
+│   │   ├── chatbot.tsx              # AI chatbot widget
+│   │   ├── portfolio-preview.tsx    # Portfolio live preview
+│   │   └── portfolio-template.tsx   # Template engine
+│   ├── 📂 context/                  # React context providers (Auth)
+│   ├── 📂 hooks/                    # Custom React hooks
+│   └── 📂 lib/                      # Utilities & API clients
+│       ├── backend-api.ts           # Flask backend API client
+│       ├── firebase.ts              # Firebase client config
+│       └── utils.ts                 # Helper utilities
 │
-├── next.config.ts              # Next.js configuration
-├── tailwind.config.ts          # Tailwind CSS configuration
-├── package.json                # Node.js dependencies & scripts
-├── tsconfig.json               # TypeScript configuration
-└── .env                        # Environment variables (not committed)
+├── 📂 backend/                      # Flask backend
+│   ├── app.py                       # Flask app factory
+│   ├── wsgi.py                      # WSGI entry point (production)
+│   ├── 📂 routes/
+│   │   ├── analyze.py               # /parse, /analyze, /session endpoints
+│   │   └── user.py                  # /user/* endpoints
+│   ├── 📂 services/
+│   │   ├── gi_service.py        
+│   │   ├── parser.py                # Resume/JD text extraction
+│   │   ├── roadmap.py               # Learning path generation
+│   │   └── firebase_admin_service.py # Firebase Admin SDK
+│   ├── 📂 db/
+│   │   └── mongo.py                 # MongoDB connection manager
+│   ├── requirements.txt             # Python dependencies
+│   ├── Procfile                     # Render/Heroku process file
+│   └── runtime.txt                  # Python version (3.11.x)
+│
+├── next.config.ts                   # Next.js configuration
+├── tailwind.config.ts               # Tailwind CSS configuration
+├── package.json                     # Node.js dependencies & scripts
+├── tsconfig.json                    # TypeScript configuration
+└── .env                             # Environment variables (not committed)
 ```
 
 ---
 
-## Prerequisites
+## ⚡ Quick Start
 
-| Tool     | Version   | Install Link                                |
-| -------- | --------- | ------------------------------------------- |
-| Node.js  | ≥ 18.x    | https://nodejs.org                          |
-| npm      | ≥ 9.x     | Bundled with Node.js                        |
-| Python   | 3.11.x    | https://python.org                          |
-| pip      | Latest    | Bundled with Python                         |
-| Git      | Latest    | https://git-scm.com                         |
-| MongoDB  | Atlas (cloud) or local | https://mongodb.com              |
+### Prerequisites
 
----
+| Tool | Version | Install |
+|------|---------|---------|
+| Node.js | ≥ 18.x | [nodejs.org](https://nodejs.org) |
+| Python | 3.11.x | [python.org](https://python.org) |
+| Git | Latest | [git-scm.com](https://git-scm.com) |
+| MongoDB | Atlas (cloud) | [mongodb.com](https://mongodb.com) |
 
-## Environment Variables
-
-### Root `.env` (for both frontend & backend)
-
-Create a `.env` file in the project root:
-
-```env
-# ─── Backend (Flask) ───────────────────────────────────────
-GEMINI_API_KEY=your_gemini_api_key
-MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/?appName=Cluster0
-MONGO_DB_NAME=adaptive_onboarding
-FLASK_ENV=development
-FLASK_DEBUG=True
-PORT=5000
-
-# ─── Frontend → Backend Connection ────────────────────────
-NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
-
-# ─── Razorpay ─────────────────────────────────────────────
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_key_secret
-NEXT_PUBLIC_RAZORPAY_KEY_ID=your_razorpay_key_id
-
-# ─── Vercel (optional, for CI/CD) ─────────────────────────
-VERCEL_TOKEN=your_vercel_token
-
-# ─── Firebase Client SDK ──────────────────────────────────
-NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
-NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://your-project-default-rtdb.firebasedatabase.app/
-
-# ─── Firebase Admin (Backend, choose one method) ──────────
-# Option A: JSON string (recommended for cloud deployment)
-FIREBASE_SERVICE_ACCOUNT_JSON={"type":"service_account","project_id":"..."}
-# Option B: File path (for local development)
-FIREBASE_SERVICE_ACCOUNT_PATH=./backend/firebase-service-account.json
-```
-
----
-
-## Local Development
-
-### 1. Clone the Repository
+### 1️⃣ Clone the Repository
 
 ```bash
 git clone https://github.com/sakhareritesh/EscapeVelocityResumeJdParser.git
 cd EscapeVelocityResumeJdParser
 ```
 
-### 2. Setup Frontend
+### 2️⃣ Setup Environment Variables
+
+Create a `.env` file in the project root (see [Environment Variables](#-environment-variables) section below).
+
+### 3️⃣ Start Frontend
 
 ```bash
-# Install Node.js dependencies
+# Install dependencies
 npm install
 
-# Start Next.js dev server (with Turbopack)
+# Start Next.js dev server (with Turbopack ⚡)
 npm run dev
 ```
+> Frontend runs at → **http://localhost:3000**
 
-Frontend runs at: **http://localhost:3000**
-
-### 3. Setup Backend
+### 4️⃣ Start Backend
 
 ```bash
 # Navigate to backend
@@ -220,186 +296,301 @@ pip install -r requirements.txt
 # Start Flask dev server
 python app.py
 ```
+> Backend runs at → **http://localhost:5000**
 
-Backend runs at: **http://localhost:5000**
+### 5️⃣ Verify 🎉
 
-### 4. Verify Both Are Running
-
-- Frontend: http://localhost:3000
-- Backend Health: http://localhost:5000/health
-- Backend Upload UI: http://localhost:5000/upload
-
----
-
-## Build & Production
-
-### Frontend Build
-
-```bash
-# Type-check (optional but recommended)
-npm run typecheck
-
-# Lint check (optional)
-npm run lint
-
-# Production build
-npm run build
-
-# Start production server
-npm run start
-```
-
-The production server runs at **http://localhost:3000** by default.
-
-### Backend Production
-
-```bash
-cd backend
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run with Gunicorn (Linux/macOS)
-gunicorn -w 2 -k gthread --threads 4 --bind 0.0.0.0:5000 --timeout 120 wsgi:app
-```
-
-> **Note:** Gunicorn does not run on Windows. For Windows production, use `waitress`:
-> ```bash
-> pip install waitress
-> waitress-serve --port=5000 wsgi:app
-> ```
+| Service | URL | Check |
+|---------|-----|-------|
+| Frontend | http://localhost:3000 | Landing page loads |
+| Backend Health | http://localhost:5000/health | `{"status": "ok"}` |
+| Backend Upload UI | http://localhost:5000/upload | Test upload interface |
 
 ---
 
-## Deployment
+## 🔐 Environment Variables
 
-### 🚀 Frontend → Vercel (Recommended)
+Create a `.env` file in the project root:
 
-1. **Push to GitHub** (ensure `.env` is in `.gitignore`)
+```env
+# ─── Backend (Flask) ───────────────────────────────────────
+MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net/?appName=Cluster0
+MONGO_DB_NAME=adaptive_onboarding
+FLASK_ENV=development
+FLASK_DEBUG=True
+PORT=5000
 
-2. **Import project in Vercel:**
-   - Go to [vercel.com/new](https://vercel.com/new)
-   - Import your GitHub repo
-   - Framework: **Next.js** (auto-detected)
+# ─── Frontend → Backend Connection ────────────────────────
+NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
 
-3. **Set Environment Variables** in Vercel Dashboard → Settings → Environment Variables:
-   ```
-   NEXT_PUBLIC_BACKEND_URL=https://your-backend.onrender.com
-   NEXT_PUBLIC_FIREBASE_API_KEY=...
-   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=...
-   NEXT_PUBLIC_FIREBASE_PROJECT_ID=...
-   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=...
-   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
-   NEXT_PUBLIC_FIREBASE_APP_ID=...
-   NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=...
-   NEXT_PUBLIC_FIREBASE_DATABASE_URL=...
-   NEXT_PUBLIC_RAZORPAY_KEY_ID=...
-   RAZORPAY_KEY_ID=...
-   RAZORPAY_KEY_SECRET=...
-   GEMINI_API_KEY=...
-   ```
+# ─── Razorpay ─────────────────────────────────────────────
+RAZORPAY_KEY_ID=your_razorpay_key_id
+RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+NEXT_PUBLIC_RAZORPAY_KEY_ID=your_razorpay_key_id
 
-4. **Deploy** — Vercel auto-builds with `npm run build` and serves the app.
+# ─── Firebase Client SDK ──────────────────────────────────
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
+NEXT_PUBLIC_FIREBASE_DATABASE_URL=https://your-project-default-rtdb.firebasedatabase.app/
 
-### 🚀 Backend → Render (Recommended)
+# ─── Firebase Admin SDK (choose one) ──────────────────────
+# Option A: JSON string (recommended for cloud)
+FIREBASE_SERVICE_ACCOUNT_JSON={"type":"service_account","project_id":"..."}
+# Option B: File path (for local development)
+FIREBASE_SERVICE_ACCOUNT_PATH=./backend/firebase-service-account.json
+```
 
-1. **Push to GitHub** (the `backend/` directory)
+---
 
-2. **Create a new Web Service on Render:**
-   - Go to [render.com/new](https://dashboard.render.com/new)
-   - Connect your GitHub repo
-   - **Root Directory:** `backend`
-   - **Runtime:** Python 3
-   - **Build Command:** `pip install -r requirements.txt`
-   - **Start Command:** `gunicorn -w 2 -k gthread --threads 4 --bind 0.0.0.0:$PORT --timeout 120 wsgi:app`
+## 📡 API Reference
 
-3. **Set Environment Variables** in Render Dashboard:
-   ```
-   GEMINI_API_KEY=your_gemini_api_key
-   MONGO_URI=mongodb+srv://...
-   MONGO_DB_NAME=adaptive_onboarding
-   FLASK_ENV=production
-   FLASK_DEBUG=False
-   FIREBASE_SERVICE_ACCOUNT_JSON={"type":"service_account",...}
-   ```
+### Backend Endpoints (Flask — Port `5000`)
 
-4. **Deploy** — Render auto-builds and starts the service.
+| Method | Endpoint | Description | Auth |
+|:------:|----------|-------------|:----:|
+| `GET` | `/` | API info & available endpoints | ❌ |
+| `GET` | `/health` | Health check (includes DB status) | ❌ |
+| `POST` | `/parse` | Extract text from uploaded PDF/DOCX/TXT | ❌ |
+| `POST` | `/analyze` | Full AI analysis (skills, gaps, roadmap) | ❌ |
+| `GET` | `/upload` | Test upload UI | ❌ |
+| `GET` | `/session/<id>` | Retrieve a stored analysis session | ❌ |
+| `GET` | `/sessions` | List recent sessions (last 20) | ❌ |
+| `GET` | `/user/sessions` | Get all sessions for a Firebase user | 🔒 |
+| `GET` | `/user/latest-session` | Get the latest session for a user | 🔒 |
+| `GET` | `/user/session/<id>` | Get a specific user session | 🔒 |
+
+<details>
+<summary><b>📝 Example: Parse Documents</b></summary>
+
+```bash
+curl -X POST http://localhost:5000/parse \
+  -F "resume_file=@resume.pdf" \
+  -F "jd_file=@job_description.pdf"
+```
+
+**Response:**
+```json
+{
+  "resume": {
+    "status": "ok",
+    "text": "John Doe — Software Engineer...",
+    "char_count": 2450,
+    "word_count": 412
+  },
+  "jd": {
+    "status": "ok",
+    "text": "We are looking for a Senior...",
+    "char_count": 1890,
+    "word_count": 320
+  }
+}
+```
+</details>
+
+<details>
+<summary><b>🚀 Example: Full AI Analysis</b></summary>
+
+```bash
+curl -X POST http://localhost:5000/analyze \
+  -F "resume_text=John Doe, 3 years Python, React..." \
+  -F "jd_text=Senior Full Stack Engineer, requires..."
+```
+
+**Response:**
+```json
+{
+  "success": true,
+  "session_id": "abc123",
+  "resume_skills": [
+    { "name": "Python", "level": "Advanced" },
+    { "name": "React", "level": "Intermediate" }
+  ],
+  "skill_gap": [
+    { "skill": "Kubernetes", "priority": "High" },
+    { "skill": "System Design", "priority": "Medium" }
+  ],
+  "learning_path": [
+    {
+      "step": 1,
+      "skill": "Docker Fundamentals",
+      "estimated_hours": 15,
+      "difficulty": "Beginner",
+      "reason": "Foundation for Kubernetes"
+    }
+  ],
+  "meta": {
+    "match_percentage": 64,
+    "total_gaps": 5,
+    "total_learning_hours": 120,
+    "total_learning_weeks": 8
+  },
+  "explanation": "Detailed AI coaching advice..."
+}
+```
+</details>
+
+---
+
+## 🗺️ Frontend Routes
+
+| Route | Description | Access |
+|-------|-------------|:------:|
+| `/` | Landing page (guests) / Dashboard (authenticated) | 🌐 |
+| `/login` | Login page (Firebase Auth) | 🌐 |
+| `/signup` | Sign up page | 🌐 |
+| `/upload-resume` | Resume & JD upload page | 🔒 |
+| `/skill-analysis` | Skill analysis results | 🔒 |
+| `/learning-roadmap` | Generated learning roadmap | 🔒 |
+| `/career-paths` | Browse career paths | 🔒 |
+| `/my-career-plan` | Personalized career plan | 🔒 |
+| `/ai-coaching` | AI coaching chat | 🔒 |
+| `/ai-matcher` | AI job matcher | 🔒 |
+| `/profile` | User profile & settings | 🔒 |
+| `/create` | Portfolio / resume builder | 🔒 |
+| `/spin` | Spin wheel (gamification) | 🔒 |
+| `/admin/recruitment` | Admin recruitment dashboard | 🔒 |
+
+> 🌐 = Public &nbsp; | &nbsp; 🔒 = Requires Authentication
+
+---
+
+## 🚀 Deployment
+
+### Recommended Stack: **Vercel + Render**
+
+<table>
+<tr>
+<td width="50%">
+
+#### 🔵 Frontend → Vercel
+
+1. Push to GitHub (ensure `.env` is in `.gitignore`)
+2. Import project at [vercel.com/new](https://vercel.com/new)
+3. Framework: **Next.js** (auto-detected)
+4. Add all `NEXT_PUBLIC_*` environment variables
+5. Deploy — Vercel auto-builds and serves
+
+</td>
+<td width="50%">
+
+#### 🟣 Backend → Render
+
+1. Push to GitHub (the `backend/` directory)
+2. Create a Web Service at [render.com](https://dashboard.render.com/new)
+3. **Root Directory:** `backend`
+4. **Build:** `pip install -r requirements.txt`
+5. **Start:** `gunicorn -w 2 -k gthread --threads 4 --bind 0.0.0.0:$PORT --timeout 120 wsgi:app`
+6. Add backend environment variables
+
+</td>
+</tr>
+</table>
 
 ### 🔗 Post-Deployment Checklist
 
-- [ ] Update `NEXT_PUBLIC_BACKEND_URL` in Vercel to point to your Render backend URL
-- [ ] Update CORS origins in `backend/app.py` to restrict to your Vercel domain (replace `"*"` with your domain)
-- [ ] Add your Vercel domain to Firebase Auth → Authorized Domains
-- [ ] Add your Vercel domain to Razorpay Dashboard → Allowed Origins
-- [ ] Test the `/health` endpoint on Render to verify MongoDB connection
-- [ ] Test the full flow: Upload → Parse → Analyze → View Results
+- [ ] Update `NEXT_PUBLIC_BACKEND_URL` in Vercel → your Render backend URL
+- [ ] Restrict CORS origins in `backend/app.py` to your Vercel domain
+- [ ] Add Vercel domain to Firebase Auth → Authorized Domains
+- [ ] Add Vercel domain to Razorpay Dashboard → Allowed Origins
+- [ ] Verify `/health` endpoint on Render
+- [ ] Test full flow: Upload → Parse → Analyze → View Results
 
-### Alternative Deployment Platforms
+### Alternative Platforms
 
-| Platform           | Frontend | Backend | Notes                              |
-| ------------------ | -------- | ------- | ---------------------------------- |
-| **Vercel + Render** | ✅       | ✅      | Recommended combo                  |
-| **Railway**         | ✅       | ✅      | Single platform for both           |
-| **Firebase Hosting** | ✅      | ❌      | Frontend only (`apphosting.yaml`)  |
-| **Heroku**          | ✅       | ✅      | Uses `Procfile`                    |
-| **AWS (EC2/ECS)**   | ✅       | ✅      | Full control, more setup           |
-| **DigitalOcean App Platform** | ✅ | ✅  | Simple PaaS                        |
-
----
-
-## API Endpoints
-
-### Backend API (Flask — Port 5000)
-
-| Method | Endpoint               | Description                              |
-| ------ | ---------------------- | ---------------------------------------- |
-| `GET`  | `/`                    | API info & available endpoints           |
-| `GET`  | `/health`              | Health check (includes DB status)        |
-| `POST` | `/parse`               | Extract text from uploaded PDF/DOCX/TXT  |
-| `POST` | `/analyze`             | Full AI analysis (skills, gaps, roadmap) |
-| `GET`  | `/upload`              | Test upload UI                           |
-| `GET`  | `/session/<id>`        | Retrieve a stored analysis session       |
-| `GET`  | `/sessions`            | List recent sessions (last 20)           |
-| `GET`  | `/user/sessions`       | Get all sessions for a Firebase user     |
-| `GET`  | `/user/latest-session` | Get the latest session for a user        |
-| `GET`  | `/user/session/<id>`   | Get a specific user session              |
-
-### Frontend Pages (Next.js — Port 3000)
-
-| Route                 | Description                          |
-| --------------------- | ------------------------------------ |
-| `/`                   | Landing page                         |
-| `/login`              | Login page (Firebase Auth)           |
-| `/signup`             | Sign up page                         |
-| `/dashboard`          | Main dashboard                       |
-| `/upload-resume`      | Resume & JD upload page              |
-| `/skill-analysis`     | Skill analysis results               |
-| `/learning-roadmap`   | Generated learning roadmap           |
-| `/career-paths`       | Browse career paths                  |
-| `/my-career-plan`     | Personalized career plan             |
-| `/ai-coaching`        | AI coaching chat                     |
-| `/ai-matcher`         | AI job matcher                       |
-| `/profile`            | User profile                         |
-| `/create`             | Portfolio / resume builder           |
-| `/spin`               | Spin wheel (gamification)            |
-| `/admin/recruitment`  | Admin recruitment dashboard          |
+| Platform | Frontend | Backend | Notes |
+|----------|:--------:|:-------:|-------|
+| **Vercel + Render** | ✅ | ✅ | Recommended combo |
+| **Railway** | ✅ | ✅ | Single platform for both |
+| **Firebase Hosting** | ✅ | ❌ | Frontend only |
+| **Heroku** | ✅ | ✅ | Uses included `Procfile` |
+| **AWS (EC2/ECS)** | ✅ | ✅ | Full control, more setup |
+| **DigitalOcean** | ✅ | ✅ | Simple PaaS |
 
 ---
 
-## NPM Scripts Reference
+## 📦 NPM Scripts
 
 ```bash
-npm run dev          # Start dev server with Turbopack
-npm run build        # Production build
-npm run start        # Start production server
-npm run lint         # Run ESLint
-npm run typecheck    # Run TypeScript type checking
-npm run genkit:dev   # Start GenKit AI dev server
-npm run genkit:watch # Start GenKit AI with file watching
+npm run dev            # Start dev server with Turbopack ⚡
+npm run build          # Production build
+npm run start          # Start production server
+npm run lint           # Run ESLint
+npm run typecheck      # TypeScript type checking
+npm run genkit:dev     # Start GenKit AI dev server
+npm run genkit:watch   # Start GenKit AI with file watching
 ```
+
+---
+
+## 🏗️ Build & Production
+
+### Frontend
+
+```bash
+npm run typecheck      # Type-check (recommended)
+npm run lint           # Lint check
+npm run build          # Production build
+npm run start          # Start production server → http://localhost:3000
+```
+
+### Backend
+
+```bash
+cd backend
+pip install -r requirements.txt
+
+# Linux / macOS
+gunicorn -w 2 -k gthread --threads 4 --bind 0.0.0.0:5000 --timeout 120 wsgi:app
+
+# Windows (Gunicorn not supported)
+pip install waitress
+waitress-serve --port=5000 wsgi:app
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. **Fork** the repository
+2. Create a **feature branch** (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. Open a **Pull Request**
+
+---
+
+## 👥 Team
+
+Built with ❤️ by **Team Escape Velocity**
+
+| Member | Role |
+|--------|------|
+| **Ritesh Sakhare** | Feature Ideation, Architecture & Database |
+| **Vedant Deore** | Frontend, Map System, Routing & AI Copilot |
+| **Samyak Raka** | UI Design & Development |
+| **Satyajit Shinde** | 3D Packing System (Three.js) |
 
 ---
 
 ## License
 
-This project is private and proprietary. All rights reserved.
+This project is **private and proprietary**. All rights reserved.
+
+---
+
+<p align="center">
+  <sub>
+    Made with 🧠 + ☕ by <b>Team Escape Velocity</b>
+  </sub>
+</p>
+
+<p align="center">
+  <a href="#skillmapr">⬆️ Back to Top</a>
+</p>
