@@ -570,8 +570,8 @@ Contributions are welcome! Please follow these steps:
 
 Built with ❤️ by **Team Escape Velocity**
 
-| Member | Role |
-|--------|------|
+| Member | 
+|--------|
 | **Ritesh Sakhare** 
 | **Vedant Deore** 
 | **Samyak Raka** 
